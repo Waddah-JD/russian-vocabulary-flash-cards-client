@@ -11,7 +11,13 @@ const baseConfig = {
       // { test: /\.css$/i, use: ["style-loader", "css-loader"] },
     ],
   },
-  resolve: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      "@components": path.resolve(__dirname, "./src/components/"),
+      "@contexts": path.resolve(__dirname, "./src/contexts/"),
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({ template: path.join("public", "index.html") }),
   ],
