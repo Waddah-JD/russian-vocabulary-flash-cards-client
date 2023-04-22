@@ -103,8 +103,11 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "components/*": ["src/components/*"],
+      "types/*": ["src/types/*"],
+      "selectors/*": ["src/selectors/*"],
+      "slices/*": ["src/slices/*"],
+      "hooks/*": ["src/hooks/*"]
     }
   },
   "exclude": ["node_modules"]

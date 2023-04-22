@@ -1,28 +1,14 @@
-import Homepage from "@components/Homepage";
-import Learn from "@components/Learn";
-import Practice from "@components/Practice";
-import { AuthContextProvider } from "@contexts/auth";
 import React from "react";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Homepage />}>
-      <Route path="/learn" element={<Learn />} />
-      <Route path="/practice" element={<Practice />} />
-    </Route>
-  )
-);
+import router from "./router";
+import store from "./store";
 
 export default function App() {
   return (
-    <AuthContextProvider>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </AuthContextProvider>
+    </Provider>
   );
 }

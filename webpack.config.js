@@ -16,8 +16,11 @@ const baseConfig = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
-      "@components": path.resolve(__dirname, "./src/components/"),
-      "@contexts": path.resolve(__dirname, "./src/contexts/"),
+      components: path.resolve(__dirname, "./src/components/"),
+      types: path.resolve(__dirname, "./src/types/"),
+      selectors: path.resolve(__dirname, "./src/selectors/"),
+      slices: path.resolve(__dirname, "./src/slices/"),
+      hooks: path.resolve(__dirname, "./src/hooks/"),
     },
   },
   plugins: [
