@@ -29,7 +29,7 @@ const baseConfig = {
   plugins: [new HtmlWebpackPlugin({ template: path.join("public", "index.html") })],
   mode: "none",
   devServer: { historyApiFallback: true },
-  output: { publicPath: "/" },
+  // output: { publicPath: "/" },
 };
 
 /** @type { import('webpack').Configuration } */
