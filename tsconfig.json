@@ -106,8 +106,11 @@
       "components/*": ["src/components/*"],
       "types/*": ["src/types/*"],
       "selectors/*": ["src/selectors/*"],
-      "slices/*": ["src/slices/*"],
-      "hooks/*": ["src/hooks/*"]
+      "actions/*": ["src/actions/*"],
+      "reducers/*": ["src/reducers/*"],
+      "hooks/*": ["src/hooks/*"],
+      "api/*": ["src/api/*"],
+      "sagas/*": ["src/sagas/*"]
     }
   },
   "exclude": ["node_modules"]
