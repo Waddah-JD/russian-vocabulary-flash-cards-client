@@ -1,7 +1,9 @@
 import React from "react";
 
-const Practice = () => {
-  return <div>Practice</div>;
-};
+import ProtectedRouteLayout from "./Layout/ProtectedRouteLayout";
+
+function Practice() {
+  return <ProtectedRouteLayout>Practice</ProtectedRouteLayout>;
+}
 
 export default Practice;

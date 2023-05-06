@@ -11,6 +11,13 @@ const router = createBrowserRouter(
       <Route path="/learn" element={<Learn />} />
       <Route path="/practice" element={<Practice />} />
       <Route path="/sign-in" element={<SignIn />} />
+      <Route
+        path="/sign-up"
+        element={
+          // TODO implement SignUp component
+          null
+        }
+      />
     </Route>
   )
 );

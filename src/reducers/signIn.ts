@@ -1,21 +1,22 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { changePassword, changeUsername, signUserIn, signUserInFailed, signUserInSucceeded } from "actions/signIn";
+import { signUserIn, signUserInFailed, signUserInSucceeded } from "actions/auth";
+import { changeEmail, changePassword } from "actions/signIn";
 
 type SignInState = {
-  username: string;
+  email: string;
   password: string;
   isLoading: boolean;
 };
 
 export const initialState: SignInState = {
-  username: "",
+  email: "",
   password: "",
   isLoading: false,
 };
 
 const reducer = createReducer<SignInState>(initialState, (builder) => {
-  builder.addCase(changeUsername, (state, action) => {
-    state.username = action.payload;
+  builder.addCase(changeEmail, (state, action) => {
+    state.email = action.payload;
   });
   builder.addCase(changePassword, (state, action) => {
     state.password = action.payload;

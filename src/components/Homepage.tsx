@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import Navigation from "./Navigation";
+import Navigation from "./Layout/Navigation";
 
-const Homepage = () => {
+function Homepage() {
   return (
     <div>
       <h1>Russian Vocabulary Flash Cards</h1>
@@ -11,6 +11,6 @@ const Homepage = () => {
       <Outlet />
     </div>
   );
-};
+}
 
 export default Homepage;

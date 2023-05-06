@@ -1,34 +1,35 @@
-import { changePassword, changeUsername, signUserIn } from "actions/signIn";
+import { signUserIn } from "actions/auth";
+import { changeEmail, changePassword } from "actions/signIn";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSignInPassword, selectSignInUsername } from "selectors/signIn";
+import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
 
-const SignIn = () => {
+function SignIn() {
   const dispatch = useDispatch();
 
-  const username = useSelector(selectSignInUsername);
+  const email = useSelector(selectSignInEmail);
   const password = useSelector(selectSignInPassword);
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeUsername(e.target.value));
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeEmail(e.target.value));
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changePassword(e.target.value));
   };
   const handleSubmitSignInForm = () => {
-    dispatch(signUserIn(username, password));
+    dispatch(signUserIn({ email, password }));
   };
 
   return (
     <div>
       SignIn
-      <input type="text" placeholder="username" value={username} onChange={handleUsernameChange} />
+      <input type="text" placeholder="email" value={email} onChange={handleEmailChange} />
       <input type="password" placeholder="password" value={password} onChange={handlePasswordChange} />
       <button type="button" onClick={handleSubmitSignInForm}>
         Sign In
       </button>
     </div>
   );
-};
+}
 
 export default SignIn;

@@ -1,14 +1,15 @@
-import { SignInResult } from "types/auth";
+import { signInWithEmailAndPassword, signOut as _signOut } from "firebase/auth";
+import { SignUserInActionPayload } from "types/auth";
 
-function delay(timeout = 5000) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(undefined);
-    }, timeout);
-  });
-}
+import { auth } from "../../src/firebase";
 
-export async function signIn(): Promise<SignInResult> {
-  await delay();
-  return Promise.resolve({ id: "1", username: "waddah" });
+export const signIn = async (payload: SignUserInActionPayload) => {
+  const { email, password } = payload;
+  console.log("email = ", email);
+  console.log("password = ", password);
+  await signInWithEmailAndPassword(auth, email, password);
+};
+
+export async function signOut() {
+  await _signOut(auth);
 }
