@@ -4,6 +4,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
 
+import UnauthenticatedOnlyRouteLayout from "./Layout/UnauthenticatedOnlyRouteLayout";
+
 function SignIn() {
   const dispatch = useDispatch();
 
@@ -21,14 +23,14 @@ function SignIn() {
   }
 
   return (
-    <div>
+    <UnauthenticatedOnlyRouteLayout>
       SignIn
       <input type="text" placeholder="email" value={email} onChange={handleEmailChange} />
       <input type="password" placeholder="password" value={password} onChange={handlePasswordChange} />
       <button type="button" onClick={handleSubmitSignInForm}>
         Sign In
       </button>
-    </div>
+    </UnauthenticatedOnlyRouteLayout>
   );
 }
 
