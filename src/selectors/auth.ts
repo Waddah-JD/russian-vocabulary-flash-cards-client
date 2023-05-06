@@ -1,3 +1,5 @@
 import { RootState } from "src/store";
 
-export const selectUserIsAuthenticated = (state: RootState) => Boolean(state.auth.uid);
+export function selectUserIsAuthenticated(state: RootState) {
+  return Boolean(state.auth.uid);
+}

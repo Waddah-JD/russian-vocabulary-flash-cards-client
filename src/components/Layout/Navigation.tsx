@@ -9,9 +9,9 @@ function Navigation() {
 
   const userIsAuthenticated = useSelector(selectUserIsAuthenticated);
 
-  const handleSignOut = () => {
+  function handleSignOut() {
     dispatch(signUserOut());
-  };
+  }
 
   return userIsAuthenticated ? (
     <nav>

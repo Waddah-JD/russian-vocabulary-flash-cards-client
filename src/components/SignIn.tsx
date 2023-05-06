@@ -10,15 +10,15 @@ function SignIn() {
   const email = useSelector(selectSignInEmail);
   const password = useSelector(selectSignInPassword);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch(changeEmail(e.target.value));
-  };
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  }
+  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch(changePassword(e.target.value));
-  };
-  const handleSubmitSignInForm = () => {
+  }
+  function handleSubmitSignInForm() {
     dispatch(signUserIn({ email, password }));
-  };
+  }
 
   return (
     <div>
