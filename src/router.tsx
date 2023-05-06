@@ -3,7 +3,7 @@ import Learn from "components/Learn";
 import Practice from "components/Practice";
 import SignIn from "components/SignIn";
 import React from "react";
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from "react-router-dom";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +18,7 @@ const router = createBrowserRouter(
           null
         }
       />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
