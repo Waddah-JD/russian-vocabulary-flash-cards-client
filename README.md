@@ -19,6 +19,6 @@ docker run -it -p 80:80 'rvfc_web'
 docker stop $(docker ps -a -q)
 ```
 
-## Deploy
+## Deployment
 
 this repo is a submodule in https://github.com/Waddah-JD/russian-vocabulary-flash-cards, all deployments happen on parent repo
