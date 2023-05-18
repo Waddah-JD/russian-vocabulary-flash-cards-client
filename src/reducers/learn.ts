@@ -1,4 +1,5 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, isAnyOf } from "@reduxjs/toolkit";
+import { signUserOut } from "actions/auth";
 import { fetchLearnWords, fetchLearnWordsFailed, fetchLearnWordsSucceeded } from "actions/words";
 import { Word } from "types/words";
 
@@ -17,13 +18,13 @@ export const initialState: LearnWordsState = {
 const reducer = createReducer<LearnWordsState>(initialState, (builder) => {
   builder.addCase(fetchLearnWords, (state) => {
     state.isLoading = true;
+    state.results = [];
   });
   builder.addCase(fetchLearnWordsSucceeded, (state, action) => {
     state.isLoading = false;
     state.results = action.payload;
   });
-  builder.addCase(fetchLearnWordsFailed, (state) => {
-    state.isLoading = false;
+  builder.addMatcher(isAnyOf(signUserOut, fetchLearnWordsFailed), (state) => {
     state.results = [];
   });
 });
