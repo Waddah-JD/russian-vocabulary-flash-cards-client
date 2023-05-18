@@ -1,5 +1,5 @@
 import { signUserUp } from "actions/auth";
-import { changeEmail, changePassword } from "actions/signUp";
+import { signUpFormChangeEmail, signUpFormChangePassword } from "actions/signUp";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,10 +12,10 @@ function SignUp(): JSX.Element {
   const password = useSelector(selectSignUpPassword);
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    dispatch(changeEmail(e.target.value));
+    dispatch(signUpFormChangeEmail(e.target.value));
   }
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    dispatch(changePassword(e.target.value));
+    dispatch(signUpFormChangePassword(e.target.value));
   }
   function handleSubmitSignInForm(): void {
     dispatch(signUserUp({ email, password }));
