@@ -28,3 +28,7 @@ export const signUserOut = createAction("AUTH/SIGN_USER_OUT");
 export const signUserOutSucceeded = createAction("AUTH/SIGN_USER_OUT_SUCCEEDED");
 
 export const signUserOutFailed = createAction("AUTH/SIGN_USER_OUT_FAILED");
+
+export const checkAuthState = createAction("AUTH/CHECK_AUTH_STATE");
+
+export const checkAuthStateFailed = createAction("AUTH/CHECK_AUTH_STATE_FAILED");

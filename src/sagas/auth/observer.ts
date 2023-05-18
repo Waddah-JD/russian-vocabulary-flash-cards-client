@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { signUserInFailed, signUserInSucceeded, signUserOutSucceeded } from "actions/auth";
+import { checkAuthState, signUserInFailed, signUserInSucceeded, signUserOutSucceeded } from "actions/auth";
 import { User } from "firebase/auth";
 import { EventChannel, eventChannel } from "redux-saga";
 import { all, call, put, take } from "redux-saga/effects";
@@ -21,6 +21,8 @@ function authStateChannel(): EventChannel<any> {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function* onAuthStateChanged() {
   const channel: EventChannel<any> = yield call(authStateChannel);
+
+  yield put(checkAuthState());
 
   while (true) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
