@@ -30,7 +30,7 @@
     "build:dev": "yarn clean && webpack",
     "build:dev:watch": "yarn build:dev -w",
     "build:prod": "yarn clean && webpack --env mode=production",
-    "start": "webpack serve --hot --open --port 3001",
+    "start:dev": "webpack serve --hot --open --port 3001",
     "format": "prettier --write src",
     "lint": "eslint src",
     "lint:fix": "yarn lint --fix",

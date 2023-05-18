@@ -1,12 +1,15 @@
 ## Run
 
-### Dev Mode: Webpack dev server
+### Development Mode
+
+#### Hot reload with Webpack dev server
 
 ```bash
-yarn start
+# run
+yarn start:dev
 ```
 
-### Prod Mode: Dockerfile
+#### Built version + Nginx proxy
 
 ```bash
 # build
@@ -21,4 +24,4 @@ docker stop $(docker ps -a -q)
 
 ## Deployment
 
-this repo is a submodule in https://github.com/Waddah-JD/russian-vocabulary-flash-cards, all deployments happen on parent repo (check https://github.com/Waddah-JD/russian-vocabulary-flash-cards#deployment), the only required action on here is pushing to master
+this repo is a submodule in https://github.com/Waddah-JD/russian-vocabulary-flash-cards, all deployments happen on parent repo (check https://github.com/Waddah-JD/russian-vocabulary-flash-cards#deployment), the only required action on here is pushing to `master`
