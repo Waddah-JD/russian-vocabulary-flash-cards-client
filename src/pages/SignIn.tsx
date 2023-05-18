@@ -1,7 +1,7 @@
 import { signUserIn } from "actions/auth";
 import { changeEmail, changePassword } from "actions/signIn";
+import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
 
@@ -23,12 +23,14 @@ function SignIn() {
 
   return (
     <UnauthenticatedOnlyRouteLayout>
-      SignIn
-      <input type="text" placeholder="email" value={email} onChange={handleEmailChange} />
-      <input type="password" placeholder="password" value={password} onChange={handlePasswordChange} />
-      <button type="button" onClick={handleSubmitSignInForm}>
-        Sign In
-      </button>
+      <h2>Sign In</h2>
+      <EmailAndPassword
+        email={email}
+        handleEmailChange={handleEmailChange}
+        password={password}
+        handlePasswordChange={handlePasswordChange}
+        handleSubmitForm={handleSubmitSignInForm}
+      />
     </UnauthenticatedOnlyRouteLayout>
   );
 }
