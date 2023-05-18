@@ -24,7 +24,7 @@ const reducer = createReducer<AuthState>(initialState, (builder) => {
     state.email = email;
     state.phoneNumber = phoneNumber;
     state.photoURL = photoURL;
-    state.isLoading = true;
+    state.isLoading = false;
   });
   builder.addCase(signUserOutSucceeded, (state) => {
     state.uid = "";
