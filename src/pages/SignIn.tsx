@@ -1,10 +1,9 @@
 import { signUserIn } from "actions/auth";
 import { changeEmail, changePassword } from "actions/signIn";
+import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
-
-import UnauthenticatedOnlyRouteLayout from "./Layout/UnauthenticatedOnlyRouteLayout";
 
 function SignIn() {
   const dispatch = useDispatch();
