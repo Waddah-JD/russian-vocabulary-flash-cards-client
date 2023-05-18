@@ -1,9 +1,16 @@
 import axios from "axios";
 
+import { getIdToken } from "./auth";
+
 axios.defaults.baseURL = process.env.SERVER_API_ENDPOINT;
 
-axios.interceptors.request.use(function (request) {
-  console.log("interceptor: request = ", request);
+axios.interceptors.request.use(async function (request) {
+  const token = await getIdToken();
+
+  if (token) {
+    request.headers["Authorization"] = `Bearer ${token}`;
+  }
+
   return request;
 });
 

@@ -1,14 +1,13 @@
-import { SignUpState } from "reducers/signUp";
 import { RootState } from "src/store";
 
-export function selectSignUpEmail(state: RootState): SignUpState["email"] {
+export function selectSignUpEmail(state: RootState): RootState["signUp"]["email"] {
   return state.signUp.email;
 }
 
-export function selectSignUpPassword(state: RootState): SignUpState["password"] {
+export function selectSignUpPassword(state: RootState): RootState["signUp"]["password"] {
   return state.signUp.password;
 }
 
-export function selectSignUpIsLoading(state: RootState): SignUpState["isLoading"] {
+export function selectSignUpIsLoading(state: RootState): RootState["signUp"]["isLoading"] {
   return state.signUp.isLoading;
 }
