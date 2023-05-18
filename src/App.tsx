@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import store from "./store";
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <Provider store={store}>
       <RouterProvider router={router} />

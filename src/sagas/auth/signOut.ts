@@ -3,7 +3,7 @@ import { signOut } from "api/auth";
 import { all, call, put } from "redux-saga/effects";
 import { takeLatest } from "redux-saga/effects";
 
-function* signOutUser() {
+function* signOutUser(): Generator {
   try {
     yield call(signOut);
   } catch (e) {
@@ -12,11 +12,11 @@ function* signOutUser() {
   }
 }
 
-function* onSignUserOut() {
+function* onSignUserOut(): Generator {
   yield takeLatest(signUserOut.type, signOutUser);
 }
 
-function* signOutSaga() {
+function* signOutSaga(): Generator {
   yield all([onSignUserOut()]);
 }
 

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectUserIsAuthenticated } from "selectors/auth";
 
-function UnauthenticatedOnlyRouteLayout(props: PropsWithChildren) {
+function UnauthenticatedOnlyRouteLayout(props: PropsWithChildren): JSX.Element {
   const navigateTo = useNavigate();
   const userIsAuthenticated = useSelector(selectUserIsAuthenticated);
 

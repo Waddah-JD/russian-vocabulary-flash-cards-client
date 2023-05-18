@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { signUserInFailed, signUserInSucceeded, signUserOutSucceeded } from "actions/auth";
 import { User } from "firebase/auth";
 import { EventChannel, eventChannel } from "redux-saga";
@@ -6,7 +7,7 @@ import { AuthUser } from "types/auth";
 
 import { auth } from "../../../src/firebase";
 
-function authStateChannel() {
+function authStateChannel(): EventChannel<any> {
   return eventChannel((emit) => {
     const unsubscribe = auth.onAuthStateChanged(
       (doc) => emit({ doc }),
@@ -17,8 +18,8 @@ function authStateChannel() {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function* onAuthStateChanged() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const channel: EventChannel<any> = yield call(authStateChannel);
 
   while (true) {
@@ -39,7 +40,7 @@ function* onAuthStateChanged() {
   }
 }
 
-function* observerSaga() {
+function* observerSaga(): Generator {
   yield all([onAuthStateChanged()]);
 }
 

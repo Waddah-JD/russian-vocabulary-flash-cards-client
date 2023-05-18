@@ -4,7 +4,7 @@ import observerSaga from "./observer";
 import signInSaga from "./signIn";
 import signOutSaga from "./signOut";
 
-function* authSaga() {
+function* authSaga(): Generator {
   yield all([observerSaga(), signInSaga(), signOutSaga()]);
 }
 

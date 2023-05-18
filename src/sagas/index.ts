@@ -2,7 +2,7 @@ import { all } from "redux-saga/effects";
 
 import authSaga from "./auth";
 
-function* rootSaga() {
+function* rootSaga(): Generator {
   yield all([authSaga()]);
 }
 

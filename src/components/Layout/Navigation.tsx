@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUserIsAuthenticated } from "selectors/auth";
 
-function Navigation() {
+function Navigation(): JSX.Element {
   const dispatch = useDispatch();
 
   const userIsAuthenticated = useSelector(selectUserIsAuthenticated);
 
-  function handleSignOut() {
+  function handleSignOut(): void {
     dispatch(signUserOut());
   }
 

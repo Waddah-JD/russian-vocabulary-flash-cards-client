@@ -1,6 +1,6 @@
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
 
-function Practice() {
+function Practice(): JSX.Element {
   return <ProtectedRouteLayout>Practice</ProtectedRouteLayout>;
 }
 

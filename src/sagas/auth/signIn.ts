@@ -4,7 +4,7 @@ import { signIn } from "api/auth";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { SignUserInActionPayload } from "types/auth";
 
-function* signInUser(action: PayloadAction<SignUserInActionPayload>) {
+function* signInUser(action: PayloadAction<SignUserInActionPayload>): Generator {
   const { payload } = action;
   const { email, password } = payload;
   try {
@@ -15,11 +15,11 @@ function* signInUser(action: PayloadAction<SignUserInActionPayload>) {
   }
 }
 
-function* onSignUserIn() {
+function* onSignUserIn(): Generator {
   yield takeLatest(signUserIn.type, signInUser);
 }
 
-function* signInSaga() {
+function* signInSaga(): Generator {
   yield all([onSignUserIn()]);
 }
 

@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { signUserIn, signUserInFailed, signUserInSucceeded } from "actions/auth";
 import { changeEmail, changePassword } from "actions/signIn";
 
-type SignInState = {
+export type SignInState = {
   email: string;
   password: string;
   isLoading: boolean;

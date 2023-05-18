@@ -7,7 +7,7 @@ type Props = {
   handleSubmitForm: () => void;
 };
 
-function EmailAndPassword(props: Props) {
+function EmailAndPassword(props: Props): JSX.Element {
   const { email, handleEmailChange, password, handlePasswordChange, submitButtonLabel, handleSubmitForm } = props;
   return (
     <form>

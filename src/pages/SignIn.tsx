@@ -5,19 +5,19 @@ import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnl
 import { useDispatch, useSelector } from "react-redux";
 import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
 
-function SignIn() {
+function SignIn(): JSX.Element {
   const dispatch = useDispatch();
 
   const email = useSelector(selectSignInEmail);
   const password = useSelector(selectSignInPassword);
 
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
     dispatch(changeEmail(e.target.value));
   }
-  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
     dispatch(changePassword(e.target.value));
   }
-  function handleSubmitSignInForm() {
+  function handleSubmitSignInForm(): void {
     dispatch(signUserIn({ email, password }));
   }
 

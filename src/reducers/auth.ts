@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { signUserInSucceeded, signUserOutSucceeded } from "actions/auth";
 import { AuthUser } from "types/auth";
 
-type AuthState = AuthUser;
+export type AuthState = AuthUser;
 
 const initialState: AuthState = {
   uid: "",
