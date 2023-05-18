@@ -23,6 +23,7 @@ const baseConfig = {
       actions: path.resolve(__dirname, "./src/actions/"),
       hooks: path.resolve(__dirname, "./src/hooks/"),
       api: path.resolve(__dirname, "./src/api/"),
+      utils: path.resolve(__dirname, "./src/utils/"),
       sagas: path.resolve(__dirname, "./src/sagas/"),
     },
   },
@@ -45,6 +46,7 @@ const prodConfig = {
   plugins: [...baseConfig.plugins, new DotEnv({ path: ".env" })],
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 module.exports = (env) => {
   // opt-in PRODUCTION explicitly otherwise, DEVELOPMENT mode will be used
   const isProduction = env.mode === "production";

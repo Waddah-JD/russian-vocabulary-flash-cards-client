@@ -1,7 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
-import { AuthUser, SignUserInActionPayload } from "types/auth";
+import { AuthenticateUserActionPayload, AuthUser } from "types/auth";
 
-export const signUserIn = createAction("AUTH/SIGN_USER_IN", (payload: SignUserInActionPayload) => {
+export const signUserIn = createAction("AUTH/SIGN_USER_IN", (payload: AuthenticateUserActionPayload) => {
   const { email, password } = payload;
   return { payload: { email, password } };
 });
@@ -11,6 +11,17 @@ export const signUserInSucceeded = createAction("AUTH/SIGN_USER_IN_SUCCEEDED", (
 });
 
 export const signUserInFailed = createAction("AUTH/SIGN_USER_IN_FAILED");
+
+export const signUserUp = createAction("AUTH/SIGN_USER_UP", (payload: AuthenticateUserActionPayload) => {
+  const { email, password } = payload;
+  return { payload: { email, password } };
+});
+
+export const signUserUpSucceeded = createAction("AUTH/SIGN_USER_UP_SUCCEEDED", (user: AuthUser) => {
+  return { payload: user };
+});
+
+export const signUserUpFailed = createAction("AUTH/SIGN_USER_UO_FAILED");
 
 export const signUserOut = createAction("AUTH/SIGN_USER_OUT");
 

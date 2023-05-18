@@ -6,4 +6,4 @@ export type AuthUser = {
   photoURL: string | null;
 };
 
-export type SignUserInActionPayload = { email: string; password: string };
+export type AuthenticateUserActionPayload = { email: string; password: string };

@@ -1,15 +1,15 @@
-import { signUserIn } from "actions/auth";
-import { changeEmail, changePassword } from "actions/signIn";
+import { signUserUp } from "actions/auth";
+import { changeEmail, changePassword } from "actions/signUp";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
+import { selectSignUpEmail, selectSignUpPassword } from "selectors/signUp";
 
-function SignIn(): JSX.Element {
+function SignUp(): JSX.Element {
   const dispatch = useDispatch();
 
-  const email = useSelector(selectSignInEmail);
-  const password = useSelector(selectSignInPassword);
+  const email = useSelector(selectSignUpEmail);
+  const password = useSelector(selectSignUpPassword);
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
     dispatch(changeEmail(e.target.value));
@@ -18,22 +18,22 @@ function SignIn(): JSX.Element {
     dispatch(changePassword(e.target.value));
   }
   function handleSubmitSignInForm(): void {
-    dispatch(signUserIn({ email, password }));
+    dispatch(signUserUp({ email, password }));
   }
 
   return (
     <UnauthenticatedOnlyRouteLayout>
-      <h2>Sign In</h2>
+      <h2>Sign Up</h2>
       <EmailAndPassword
         email={email}
         handleEmailChange={handleEmailChange}
         password={password}
         handlePasswordChange={handlePasswordChange}
         handleSubmitForm={handleSubmitSignInForm}
-        submitButtonLabel="Sign In"
+        submitButtonLabel="Sign Up"
       />
     </UnauthenticatedOnlyRouteLayout>
   );
 }
 
-export default SignIn;
+export default SignUp;

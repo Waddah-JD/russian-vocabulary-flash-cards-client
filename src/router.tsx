@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import Learn from "./pages/Learn";
 import Practice from "./pages/Practice";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,13 +12,7 @@ const router = createBrowserRouter(
       <Route path="/learn" element={<Learn />} />
       <Route path="/practice" element={<Practice />} />
       <Route path="/sign-in" element={<SignIn />} />
-      <Route
-        path="/sign-up"
-        element={
-          // TODO implement SignUp component
-          null
-        }
-      />
+      <Route path="/sign-up" element={<SignUp />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
