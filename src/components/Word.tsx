@@ -224,7 +224,9 @@ function WordDetails(props: Props): JSX.Element {
       <p>Pronunciation: {pronunciation}</p>
       <p>Accented: {accented}</p>
       <p>Type: {type}</p>
-      <p>Translations: {englishTranslations.join(", ")}</p>
+      {englishTranslations.length > 0 && (
+        <p>Translations: {englishTranslations.map(({ translation }) => translation).join(", ")}</p>
+      )}
       {type === WordType.NOUN && <NounDetails {...noun} />}
       {type === WordType.VERB && <VerbDetails {...verb} />}
     </div>
