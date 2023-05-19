@@ -1,9 +1,9 @@
 # build phase
-FROM node:14 AS build
+FROM node:16 AS build
 WORKDIR /app
-COPY package*.json ./
-RUN yarn
+COPY package.json yarn.lock ./
 COPY . .
+RUN yarn install
 RUN yarn build:prod
 
 # serve phasee
