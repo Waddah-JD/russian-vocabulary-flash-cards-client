@@ -1,6 +1,5 @@
-import { addToCollectionNoteFormValueChanged, addToCollectionNoteFormValueSubmitted } from "actions/words";
-import { useDispatch, useSelector } from "react-redux";
-import { selectWordNotes } from "selectors/learn";
+import { addWordToUserCollection } from "api/user-words";
+import { useState } from "react";
 import { Word } from "types/words";
 
 import WordDetails from "./Word";
@@ -14,22 +13,20 @@ type AddToUserCollectionFormProps = {
 };
 
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
-  const dispatch = useDispatch();
+  const [note, setNote] = useState("");
 
-  const wordNotes = useSelector((state) => selectWordNotes(state, props.id));
-
-  function handleChangeAddToCollectionNoteValue(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-    dispatch(addToCollectionNoteFormValueChanged(props.id, e.target.value));
+  function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
+    setNote(e.target.value);
   }
-  function handleSubmitAddToCollectionForm(): void {
-    if (wordNotes) {
-      dispatch(addToCollectionNoteFormValueSubmitted(props.id, wordNotes));
+  async function handleAddWordToUserCollection(): Promise<void> {
+    if (note) {
+      await addWordToUserCollection(props.id, note);
     }
   }
   return (
     <form>
-      <textarea value={wordNotes} onChange={handleChangeAddToCollectionNoteValue} />
-      <button type="button" onClick={handleSubmitAddToCollectionForm}>
+      <textarea value={note} onChange={handleSetNote} />
+      <button type="button" onClick={handleAddWordToUserCollection}>
         Add
       </button>
     </form>

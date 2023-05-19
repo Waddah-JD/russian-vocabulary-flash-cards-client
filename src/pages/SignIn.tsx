@@ -1,24 +1,20 @@
-import { signUserIn } from "actions/auth";
-import { signInFormChangeEmail, signInFormChangePassword } from "actions/signIn";
+import { signIn } from "api/auth";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
-import { useDispatch, useSelector } from "react-redux";
-import { selectSignInEmail, selectSignInPassword } from "selectors/signIn";
+import { useState } from "react";
 
 function SignIn(): JSX.Element {
-  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const email = useSelector(selectSignInEmail);
-  const password = useSelector(selectSignInPassword);
-
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    dispatch(signInFormChangeEmail(e.target.value));
+  function handleSetEmail(e: React.ChangeEvent<HTMLInputElement>): void {
+    setEmail(e.target.value);
   }
-  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    dispatch(signInFormChangePassword(e.target.value));
+  function handleSetPassword(e: React.ChangeEvent<HTMLInputElement>): void {
+    setPassword(e.target.value);
   }
-  function handleSubmitSignInForm(): void {
-    dispatch(signUserIn({ email, password }));
+  async function handleSignIn(): Promise<void> {
+    await signIn(email, password);
   }
 
   return (
@@ -26,10 +22,10 @@ function SignIn(): JSX.Element {
       <h2>Sign In</h2>
       <EmailAndPassword
         email={email}
-        handleEmailChange={handleEmailChange}
+        handleEmailChange={handleSetEmail}
         password={password}
-        handlePasswordChange={handlePasswordChange}
-        handleSubmitForm={handleSubmitSignInForm}
+        handlePasswordChange={handleSetPassword}
+        handleSubmitForm={handleSignIn}
         submitButtonLabel="Sign In"
       />
     </UnauthenticatedOnlyRouteLayout>

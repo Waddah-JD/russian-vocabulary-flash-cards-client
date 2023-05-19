@@ -1,15 +1,13 @@
-import { signUserOut } from "actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "api/auth";
+import { AuthContext } from "contexts/Auth";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { selectUserIsAuthenticated } from "selectors/auth";
 
 function Navigation(): JSX.Element {
-  const dispatch = useDispatch();
+  const { userIsAuthenticated } = useContext(AuthContext);
 
-  const userIsAuthenticated = useSelector(selectUserIsAuthenticated);
-
-  function handleSignOut(): void {
-    dispatch(signUserOut());
+  async function handleSignOut(): Promise<void> {
+    await signOut();
   }
 
   return userIsAuthenticated ? (

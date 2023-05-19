@@ -1,10 +1,8 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as _signOut } from "firebase/auth";
-import { AuthenticateUserActionPayload } from "types/auth";
 
 import { auth } from "../../src/firebase";
 
-export async function signIn(payload: AuthenticateUserActionPayload): Promise<void> {
-  const { email, password } = payload;
+export async function signIn(email: string, password: string): Promise<void> {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
@@ -12,8 +10,7 @@ export async function signOut(): Promise<void> {
   await _signOut(auth);
 }
 
-export async function signUp(payload: AuthenticateUserActionPayload): Promise<void> {
-  const { email, password } = payload;
+export async function signUp(email: string, password: string): Promise<void> {
   await createUserWithEmailAndPassword(auth, email, password);
 }
 

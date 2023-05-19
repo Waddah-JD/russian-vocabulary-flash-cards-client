@@ -5,5 +5,3 @@ export type AuthUser = {
   phoneNumber: string | null;
   photoURL: string | null;
 };
-
-export type AuthenticateUserActionPayload = { email: string; password: string };

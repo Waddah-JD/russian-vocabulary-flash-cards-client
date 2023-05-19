@@ -1,14 +1,13 @@
 import SplashScreen from "components/SplashScreen";
-import { Provider, useSelector } from "react-redux";
+import AuthContextProvider, { AuthContext } from "contexts/Auth";
+import { useContext } from "react";
 import { RouterProvider } from "react-router-dom";
-import { selectUserAuthStateIsLoading } from "selectors/auth";
 
 import router from "./router";
-import store from "./store";
 
 function Main(): JSX.Element {
-  const authStateIsLoading = useSelector(selectUserAuthStateIsLoading);
-  const shouldShowSplashScreen = [authStateIsLoading].some((loading) => Boolean(loading)); // all the loaders that should trigger splash screen
+  const { isAuthenticating } = useContext(AuthContext);
+  const shouldShowSplashScreen = [isAuthenticating].some((loading) => Boolean(loading)); // all the loaders that should trigger splash screen
 
   if (shouldShowSplashScreen) {
     return <SplashScreen />;
@@ -17,10 +16,12 @@ function Main(): JSX.Element {
   return <RouterProvider router={router} />;
 }
 
-export default function App(): JSX.Element {
+function App(): JSX.Element {
   return (
-    <Provider store={store}>
+    <AuthContextProvider>
       <Main />
-    </Provider>
+    </AuthContextProvider>
   );
 }
+
+export default App;

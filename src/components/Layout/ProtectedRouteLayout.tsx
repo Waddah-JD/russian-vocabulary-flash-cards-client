@@ -1,11 +1,10 @@
-import { PropsWithChildren, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { AuthContext } from "contexts/Auth";
+import { PropsWithChildren, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { selectUserIsAuthenticated } from "selectors/auth";
 
 function ProtectedRouteLayout(props: PropsWithChildren): JSX.Element {
+  const { userIsAuthenticated } = useContext(AuthContext);
   const navigateTo = useNavigate();
-  const userIsAuthenticated = useSelector(selectUserIsAuthenticated);
 
   useEffect(() => {
     if (!userIsAuthenticated) {
