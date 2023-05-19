@@ -2,7 +2,7 @@ import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsNotNil } from "utils/general";
 
 type Props = {
-  data: Word;
+  details: Word;
 };
 
 function NounDetails(props: Noun): JSX.Element {
@@ -214,10 +214,10 @@ function VerbDetails(props: Verb): JSX.Element {
 }
 
 function WordDetails(props: Props): JSX.Element {
-  const { id, word, pronunciation, accented, type, noun, verb, englishTranslations } = props.data;
+  const { id, word, pronunciation, accented, type, noun, verb, englishTranslations } = props.details;
 
   return (
-    <div style={{ marginBottom: "100px" }}>
+    <div>
       <h3>
         {id}: {word}
       </h3>

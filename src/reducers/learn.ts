@@ -1,12 +1,17 @@
 import { createReducer, isAnyOf } from "@reduxjs/toolkit";
 import { signUserOut } from "actions/auth";
-import { fetchLearnWords, fetchLearnWordsFailed, fetchLearnWordsSucceeded } from "actions/words";
+import {
+  addToCollectionNoteFormValueChanged,
+  fetchLearnWords,
+  fetchLearnWordsFailed,
+  fetchLearnWordsSucceeded,
+} from "actions/words";
 import { Word } from "types/words";
 
 export type LearnWordsState = {
   batchSize: number;
   isLoading: boolean;
-  results: Word[];
+  results: (Word & { note?: string })[];
 };
 
 export const initialState: LearnWordsState = {
@@ -23,6 +28,13 @@ const reducer = createReducer<LearnWordsState>(initialState, (builder) => {
   builder.addCase(fetchLearnWordsSucceeded, (state, action) => {
     state.isLoading = false;
     state.results = action.payload;
+  });
+  builder.addCase(addToCollectionNoteFormValueChanged, (state, action) => {
+    state.results = state.results.map((it) => {
+      if (it.id !== action.payload.id) return it;
+
+      return { ...it, note: action.payload.note };
+    });
   });
   builder.addMatcher(isAnyOf(signUserOut, fetchLearnWordsFailed), (state) => {
     state.results = [];

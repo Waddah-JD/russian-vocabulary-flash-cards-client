@@ -1,14 +1,14 @@
 import { fetchLearnWords } from "actions/words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
-import WordDetails from "components/Word";
+import WordToLearn from "components/Word/WordToLearn";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLearnWordsBatchSize, selectLearnWordsResults } from "selectors/learn";
+import { selectLearnBatchSize, selectLearnWordsResults } from "selectors/learn";
 
 function Learn(): JSX.Element {
   const dispatch = useDispatch();
 
-  const batchSize = useSelector(selectLearnWordsBatchSize);
+  const batchSize = useSelector(selectLearnBatchSize);
   const results = useSelector(selectLearnWordsResults);
 
   function handleFetchLearnWords(): void {
@@ -25,7 +25,7 @@ function Learn(): JSX.Element {
       {results.length > 0 ? (
         <div>
           {results.map((data) => {
-            return <WordDetails key={data.id} data={data} />;
+            return <WordToLearn key={data.id} details={data} />;
           })}
         </div>
       ) : (
