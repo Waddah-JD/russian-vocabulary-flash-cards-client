@@ -107,13 +107,10 @@
     "paths": {
       "components/*": ["src/components/*"],
       "types/*": ["src/types/*"],
-      "selectors/*": ["src/selectors/*"],
-      "actions/*": ["src/actions/*"],
-      "reducers/*": ["src/reducers/*"],
       "hooks/*": ["src/hooks/*"],
       "api/*": ["src/api/*"],
-      "sagas/*": ["src/sagas/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "contexts/*": ["src/contexts/*"]
     }
   },
   "exclude": ["node_modules"]
