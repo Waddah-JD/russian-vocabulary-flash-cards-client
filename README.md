@@ -1,25 +1,10 @@
 ## Run
 
-### Development Mode
-
-#### Hot reload with Webpack dev server
+### Development
 
 ```bash
 # run
 yarn start:dev
-```
-
-#### Built version + Nginx proxy
-
-```bash
-# build
-docker build --tag 'rvfc_web' .
-
-# run
-docker run -it -p 80:80 'rvfc_web'
-
-# stop
-docker stop $(docker ps -a -q)
 ```
 
 ## Deployment
