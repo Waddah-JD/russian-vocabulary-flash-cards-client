@@ -75,3 +75,7 @@ export type Word = {
   verb: Verb;
   englishTranslations: EnglishTranslation[];
 };
+
+export type PracticeWord = {
+  word: Word;
+};

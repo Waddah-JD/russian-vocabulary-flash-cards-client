@@ -5,6 +5,7 @@ import useFetch from "hooks/useFetch";
 import { Word } from "types/words";
 
 function Learn(): JSX.Element {
+  // TODO add a selector for batch number
   const { data: words, error, loading } = useFetch<Word[]>(() => learnWords(10), { triggerOnMount: true });
 
   if (loading) {
