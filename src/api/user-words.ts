@@ -14,5 +14,5 @@ export async function getPracticeWords(batchSize: number): Promise<PracticeWord[
 }
 
 export async function submitPracticeWordResult(id: Word["id"], successful: boolean | undefined): Promise<void> {
-  await axios.put<Word[]>(`${path}/practice/${id}`, { data: { successful } });
+  await axios.put<Word[]>(`${path}/practice/${id}`, { successful });
 }

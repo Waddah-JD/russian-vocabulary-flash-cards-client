@@ -1,6 +1,8 @@
 // import { submitPracticeWordResult } from "api/user-words";
 // import useFetch from "hooks/useFetch";
 // import { useState } from "react";
+import { submitPracticeWordResult } from "api/user-words";
+import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
 
 import WordDetails from "./Word";
@@ -14,34 +16,43 @@ type SubmitPracticeResultFormProps = {
 };
 
 function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Element {
-  // const [successful, setSuccessful] = useState<boolean>();
+  // TODO fix useFetch shit show
+  const {
+    loading: trueCallLoading,
+    error: trueCallError,
+    done: trueCallDone,
+    trigger: trueCallTrigger,
+  } = useFetch<void>(() => submitPracticeWordResult(props.id, true));
+  const {
+    loading: falseCallLoading,
+    error: falseCallError,
+    done: falseCallDone,
+    trigger: falseCallTrigger,
+  } = useFetch<void>(() => submitPracticeWordResult(props.id, false));
 
-  // const { loading, error, done, trigger } = useFetch<void>(() => submitPracticeWordResult(props.id, successful));
+  const loading = trueCallLoading || falseCallLoading;
+  const error = trueCallError || falseCallError;
+  const done = trueCallDone || falseCallDone;
 
-  // function handleSetSuccessful(isSuccessful: boolean): void {
-  //   setSuccessful(isSuccessful);
-  // }
+  if (loading) {
+    return <p style={{ color: "green" }}>Loading...</p>;
+  }
 
-  // if (loading) {
-  //   return <p style={{ color: "green" }}>Loading...</p>;
-  // }
+  if (error) {
+    return <p style={{ color: "red" }}>Something went wrong!</p>;
+  }
 
-  // if (error) {
-  //   return <p style={{ color: "red" }}>Something went wrong!</p>;
-  // }
-
-  const done = false;
   return done ? (
     <p>Submitted Successfully!</p>
   ) : (
     <div>
-      {/* <button type="button" onClick={trigger}>
+      <button type="button" onClick={trueCallTrigger}>
         Yas
       </button>
 
-      <button type="button" onClick={trigger}>
+      <button type="button" onClick={falseCallTrigger}>
         Fail
-      </button> */}
+      </button>
     </div>
   );
 }
