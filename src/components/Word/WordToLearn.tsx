@@ -13,19 +13,17 @@ type AddToUserCollectionFormProps = {
 };
 
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
-  const [note, setNote] = useState("");
+  const [notes, setNotes] = useState<string>();
 
   function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-    setNote(e.target.value);
+    setNotes(e.target.value);
   }
   async function handleAddWordToUserCollection(): Promise<void> {
-    if (note) {
-      await addWordToUserCollection(props.id, note);
-    }
+    await addWordToUserCollection(props.id, notes);
   }
   return (
     <form>
-      <textarea value={note} onChange={handleSetNote} />
+      <textarea value={notes} onChange={handleSetNote} />
       <button type="button" onClick={handleAddWordToUserCollection}>
         Add
       </button>

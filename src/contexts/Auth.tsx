@@ -17,9 +17,9 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 function AuthContextProvider(props: PropsWithChildren): JSX.Element {
-  const [isAuthenticating, setIsAuthenticating] = useState<AuthContextType["isAuthenticating"]>(true);
   const [authenticatedUser, setAuthenticatedUser] = useState<AuthContextType["authenticatedUser"]>(null);
   const [userIsAuthenticated, setUserIsAuthenticated] = useState<AuthContextType["userIsAuthenticated"]>(false);
+  const [isAuthenticating, setIsAuthenticating] = useState<AuthContextType["isAuthenticating"]>(true);
 
   useEffect(() => {
     setIsAuthenticating(true);
