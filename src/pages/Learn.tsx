@@ -1,29 +1,26 @@
 import { learnWords } from "api/words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
 import WordToLearn from "components/Word/WordToLearn";
-import { useEffect, useState } from "react";
+import useFetch from "hooks/useFetch";
 import { Word } from "types/words";
 
 function Learn(): JSX.Element {
-  const [words, setWords] = useState<Word[]>([]);
+  const { data: words, error, loading } = useFetch<Word[]>(() => learnWords(10), { triggerOnMount: true });
 
-  function handleFetchLearnWords(): void {
-    async function fetchLearnWords(): Promise<void> {
-      const results = await learnWords(10); // TODO
-      setWords(results);
-    }
-
-    fetchLearnWords();
+  if (loading) {
+    // TODO
+    return <p>Loading..</p>;
   }
 
-  useEffect(() => {
-    handleFetchLearnWords();
-  }, []);
+  if (error) {
+    // TODO
+    return <p>ERROR!</p>;
+  }
 
   return (
     <ProtectedRouteLayout>
       <h2>Learn</h2>
-      {words.length > 0 ? (
+      {words && words.length > 0 ? (
         <div>
           {words.map((data) => {
             return <WordToLearn key={data.id} details={data} />;
