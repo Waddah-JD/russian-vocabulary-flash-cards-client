@@ -1,6 +1,6 @@
 import { learnWords } from "api/words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
-import WordToLearn from "components/Word/WordToLearn";
+import LearnWord from "components/Word/LearnWord";
 import useFetch from "hooks/useFetch";
 import { Word } from "types/words";
 
@@ -23,7 +23,7 @@ function Learn(): JSX.Element {
       {words && words.length > 0 ? (
         <div>
           {words.map((data) => {
-            return <WordToLearn key={data.id} details={data} />;
+            return <LearnWord key={data.id} details={data} />;
           })}
         </div>
       ) : (

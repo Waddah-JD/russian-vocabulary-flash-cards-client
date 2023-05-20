@@ -42,7 +42,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   );
 }
 
-function WordToLearn(props: Props): JSX.Element {
+function LearnWord(props: Props): JSX.Element {
   return (
     <>
       <WordDetails details={props.details} />
@@ -51,4 +51,4 @@ function WordToLearn(props: Props): JSX.Element {
   );
 }
 
-export default WordToLearn;
+export default LearnWord;
