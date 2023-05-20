@@ -1,4 +1,5 @@
 import { addWordToUserCollection } from "api/user-words";
+import useFetch from "hooks/useFetch";
 import { useState } from "react";
 import { Word } from "types/words";
 
@@ -15,16 +16,26 @@ type AddToUserCollectionFormProps = {
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
   const [notes, setNotes] = useState<string>();
 
+  const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, notes));
+
   function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
     setNotes(e.target.value);
   }
-  async function handleAddWordToUserCollection(): Promise<void> {
-    await addWordToUserCollection(props.id, notes);
+
+  if (loading) {
+    return <p style={{ color: "green" }}>Loading...</p>;
   }
-  return (
+
+  if (error) {
+    return <p style={{ color: "red" }}>Something went wrong!</p>;
+  }
+
+  return done ? (
+    <p>Added Successfully!</p>
+  ) : (
     <form>
       <textarea value={notes} onChange={handleSetNote} />
-      <button type="button" onClick={handleAddWordToUserCollection}>
+      <button type="button" onClick={trigger}>
         Add
       </button>
     </form>
