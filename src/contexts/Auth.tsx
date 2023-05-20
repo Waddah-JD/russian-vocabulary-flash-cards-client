@@ -5,7 +5,7 @@ import { AuthUser } from "types/auth";
 import { auth } from "../firebase";
 
 type AuthContextType = {
-  isAuthenticating: boolean;
+  isAuthenticating: boolean | null;
   authenticatedUser: AuthUser | null;
   userIsAuthenticated: boolean;
 };
@@ -19,7 +19,7 @@ export const AuthContext = createContext<AuthContextType>({
 function AuthContextProvider(props: PropsWithChildren): JSX.Element {
   const [authenticatedUser, setAuthenticatedUser] = useState<AuthContextType["authenticatedUser"]>(null);
   const [userIsAuthenticated, setUserIsAuthenticated] = useState<AuthContextType["userIsAuthenticated"]>(false);
-  const [isAuthenticating, setIsAuthenticating] = useState<AuthContextType["isAuthenticating"]>(true);
+  const [isAuthenticating, setIsAuthenticating] = useState<AuthContextType["isAuthenticating"]>(null);
 
   useEffect(() => {
     setIsAuthenticating(true);
