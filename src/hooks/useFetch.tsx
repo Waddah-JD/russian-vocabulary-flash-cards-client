@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 
 type ReturnType<T> = {
@@ -11,8 +12,8 @@ type Options = {
   triggerOnMount?: boolean;
 };
 
-// it's like useSWR only worse
-function useFetch<T>(fn: (...args: unknown[]) => Promise<T>, options?: Options): ReturnType<T> {
+// when you buy a `useSWR` hook from AliExpress
+function useFetch<T>(fn: (...args: any[]) => Promise<T>, args: any[], options?: Options): ReturnType<T> {
   const triggerOnMount = options?.triggerOnMount || false;
 
   const [data, setData] = useState<ReturnType<T>["data"]>(null);
@@ -20,10 +21,10 @@ function useFetch<T>(fn: (...args: unknown[]) => Promise<T>, options?: Options):
   const [error, setError] = useState<ReturnType<T>["error"]>();
   const [done, setDone] = useState<ReturnType<T>["done"]>(false);
 
-  async function handleFetch(): Promise<void> {
+  async function trigger(): Promise<void> {
     try {
       setLoading(true);
-      const result = await fn();
+      const result = await fn(...args);
       setData(result);
       setDone(true);
     } catch (error) {
@@ -36,11 +37,11 @@ function useFetch<T>(fn: (...args: unknown[]) => Promise<T>, options?: Options):
 
   useEffect(() => {
     if (triggerOnMount) {
-      handleFetch();
+      trigger();
     }
   }, []);
 
-  return { data, loading, error, done, trigger: handleFetch };
+  return { data, loading, error, done, trigger };
 }
 
 export default useFetch;

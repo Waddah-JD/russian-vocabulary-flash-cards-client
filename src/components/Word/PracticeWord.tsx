@@ -1,6 +1,3 @@
-// import { submitPracticeWordResult } from "api/user-words";
-// import useFetch from "hooks/useFetch";
-// import { useState } from "react";
 import { submitPracticeWordResult } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
@@ -22,13 +19,13 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
     error: trueCallError,
     done: trueCallDone,
     trigger: trueCallTrigger,
-  } = useFetch<void>(() => submitPracticeWordResult(props.id, true));
+  } = useFetch<void>(submitPracticeWordResult, [props.id, true]);
   const {
     loading: falseCallLoading,
     error: falseCallError,
     done: falseCallDone,
     trigger: falseCallTrigger,
-  } = useFetch<void>(() => submitPracticeWordResult(props.id, false));
+  } = useFetch<void>(submitPracticeWordResult, [props.id, false]);
 
   const loading = trueCallLoading || falseCallLoading;
   const error = trueCallError || falseCallError;

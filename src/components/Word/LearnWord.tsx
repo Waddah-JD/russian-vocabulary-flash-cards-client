@@ -16,7 +16,7 @@ type AddToUserCollectionFormProps = {
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
   const [notes, setNotes] = useState<string>();
 
-  const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, notes));
+  const { loading, error, done, trigger } = useFetch<void>(addWordToUserCollection, [props.id, notes]);
 
   function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
     setNotes(e.target.value);

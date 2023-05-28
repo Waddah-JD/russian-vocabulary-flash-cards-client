@@ -6,11 +6,7 @@ import { PracticeWord } from "types/words";
 
 function Practice(): JSX.Element {
   // TODO add a selector for batch number
-  const {
-    data: words,
-    error,
-    loading,
-  } = useFetch<PracticeWord[]>(() => getPracticeWords(10), { triggerOnMount: true });
+  const { data: words, error, loading } = useFetch<PracticeWord[]>(getPracticeWords, [10], { triggerOnMount: true });
 
   if (loading) {
     // TODO
