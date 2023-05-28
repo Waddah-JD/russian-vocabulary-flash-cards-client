@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { addWordToUserCollection } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { useState } from "react";
@@ -35,7 +36,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   ) : (
     <form>
       <textarea value={notes} onChange={handleSetNote} />
-      <button type="button" onClick={trigger}>
+      <button type="button" onClick={() => trigger()}>
         Add
       </button>
     </form>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { submitPracticeWordResult } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
@@ -13,23 +14,7 @@ type SubmitPracticeResultFormProps = {
 };
 
 function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Element {
-  // TODO fix useFetch shit show
-  const {
-    loading: trueCallLoading,
-    error: trueCallError,
-    done: trueCallDone,
-    trigger: trueCallTrigger,
-  } = useFetch<void>(submitPracticeWordResult, [props.id, true]);
-  const {
-    loading: falseCallLoading,
-    error: falseCallError,
-    done: falseCallDone,
-    trigger: falseCallTrigger,
-  } = useFetch<void>(submitPracticeWordResult, [props.id, false]);
-
-  const loading = trueCallLoading || falseCallLoading;
-  const error = trueCallError || falseCallError;
-  const done = trueCallDone || falseCallDone;
+  const { loading, error, done, trigger } = useFetch<void>(submitPracticeWordResult);
 
   if (loading) {
     return <p style={{ color: "green" }}>Loading...</p>;
@@ -43,11 +28,11 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
     <p>Submitted Successfully!</p>
   ) : (
     <div>
-      <button type="button" onClick={trueCallTrigger}>
+      <button type="button" onClick={() => trigger(props.id, true)}>
         Yas
       </button>
 
-      <button type="button" onClick={falseCallTrigger}>
+      <button type="button" onClick={() => trigger(props.id, false)}>
         Fail
       </button>
     </div>

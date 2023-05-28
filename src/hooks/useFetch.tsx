@@ -6,14 +6,14 @@ type ReturnType<T> = {
   loading: boolean | null;
   error: unknown;
   done: boolean;
-  trigger: () => Promise<void>;
+  trigger: (...args: any[]) => Promise<void>;
 };
 type Options = {
   triggerOnMount?: boolean;
 };
 
 // when you buy a `useSWR` hook from AliExpress
-function useFetch<T>(fn: (...args: any[]) => Promise<T>, args: any[], options?: Options): ReturnType<T> {
+function useFetch<T>(fn: (...args: any[]) => Promise<T>, defaultArgs?: any[], options?: Options): ReturnType<T> {
   const triggerOnMount = options?.triggerOnMount || false;
 
   const [data, setData] = useState<ReturnType<T>["data"]>(null);
@@ -21,10 +21,10 @@ function useFetch<T>(fn: (...args: any[]) => Promise<T>, args: any[], options?: 
   const [error, setError] = useState<ReturnType<T>["error"]>();
   const [done, setDone] = useState<ReturnType<T>["done"]>(false);
 
-  async function trigger(): Promise<void> {
+  async function trigger(...customArgs: any[]): Promise<void> {
     try {
       setLoading(true);
-      const result = await fn(...args);
+      const result = await fn(...(customArgs || defaultArgs || []));
       setData(result);
       setDone(true);
     } catch (error) {
@@ -37,7 +37,7 @@ function useFetch<T>(fn: (...args: any[]) => Promise<T>, args: any[], options?: 
 
   useEffect(() => {
     if (triggerOnMount) {
-      trigger();
+      trigger(...(defaultArgs || []));
     }
   }, []);
 
