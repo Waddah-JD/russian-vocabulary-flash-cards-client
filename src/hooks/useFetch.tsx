@@ -28,7 +28,6 @@ function useFetch<T>(fn: (...args: any[]) => Promise<T>, defaultArgs?: any[], op
       setData(result);
       setDone(true);
     } catch (error) {
-      console.error(error);
       setError(error);
     } finally {
       setLoading(false);
