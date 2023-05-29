@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsNotNil } from "utils/general";
 
@@ -225,7 +226,14 @@ function WordDetails(props: Props): JSX.Element {
       <p>Accented: {accented}</p>
       <p>Type: {type}</p>
       {englishTranslations.length > 0 && (
-        <p>Translations: {englishTranslations.map(({ translation }) => translation).join(", ")}</p>
+        <p>
+          Translations:{" "}
+          {englishTranslations.map(({ id, translation }) => (
+            <Link style={{ paddingInlineEnd: "5px" }} key={id} to={`/english-translations/${id}`}>
+              {translation}
+            </Link>
+          ))}
+        </p>
       )}
       {type === WordType.NOUN && <NounDetails {...noun} />}
       {type === WordType.VERB && <VerbDetails {...verb} />}

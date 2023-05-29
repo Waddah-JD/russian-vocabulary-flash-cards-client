@@ -1,5 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from "react-router-dom";
 
+import EnglishTranslation from "./pages/EnglishTranslation";
 import Homepage from "./pages/Homepage";
 import Learn from "./pages/Learn";
 import Practice from "./pages/Practice";
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
       <Route path="/practice" element={<Practice />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/english-translations/:id" element={<EnglishTranslation />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
