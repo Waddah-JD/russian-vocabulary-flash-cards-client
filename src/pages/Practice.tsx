@@ -1,5 +1,6 @@
 import { getPracticeWords } from "api/user-words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
+import NextOnlyPager from "components/Pagers/NextOnlyPager";
 import PracticeWordDetails from "components/Word/PracticeWord";
 import useFetch from "hooks/useFetch";
 import { PracticeWord } from "types/words";
@@ -21,15 +22,7 @@ function Practice(): JSX.Element {
   return (
     <ProtectedRouteLayout>
       <h2>Practice</h2>
-      {words && words.length > 0 ? (
-        <div>
-          {words.map((data) => {
-            return <PracticeWordDetails key={data.word.id} word={data.word} />;
-          })}
-        </div>
-      ) : (
-        <div>NO RESULTS</div> // TODO
-      )}
+      <NextOnlyPager data={words?.map((it) => it.word)} pageView={PracticeWordDetails} />
     </ProtectedRouteLayout>
   );
 }
