@@ -43,10 +43,15 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
 function PrevNextPagerController(props: PrevNextPagerControllerProps): JSX.Element {
   return (
     <div>
-      <Button variant="outlined" disabled={props.moveToPreviousPageIsDisabled} onClick={props.moveToPreviousPage}>
+      <Button
+        size="small"
+        variant="outlined"
+        disabled={props.moveToPreviousPageIsDisabled}
+        onClick={props.moveToPreviousPage}
+      >
         prev
       </Button>
-      <Button variant="outlined" disabled={props.moveToNextPageIsDisabled} onClick={props.moveToNextPage}>
+      <Button size="small" variant="outlined" disabled={props.moveToNextPageIsDisabled} onClick={props.moveToNextPage}>
         next
       </Button>
     </div>

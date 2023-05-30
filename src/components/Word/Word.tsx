@@ -1,7 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
-import { oneOfTheArgsIsNotNil } from "utils/general";
 
 type Props = {
   details: Word;
@@ -103,109 +102,78 @@ function VerbDetails(props: Verb): JSX.Element {
       <p>Infinitive: {infinitive}</p>
       <p>Imperfect: {isImperfective ? "✅" : "❌"}</p>
 
-      {oneOfTheArgsIsNotNil(
-        conjugationPastMasculine,
-        conjugationPastFeminine,
-        conjugationPasNeuter,
-        conjugationPastPlural
-      ) && (
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Past Masculine</TableCell>
-                <TableCell>Past Feminine</TableCell>
-                <TableCell>Past Neuter</TableCell>
-                <TableCell>Past Plural</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>{conjugationPastMasculine}</TableCell>
-                <TableCell>{conjugationPastFeminine}</TableCell>
-                <TableCell>{conjugationPasNeuter}</TableCell>
-                <TableCell>{conjugationPastPlural}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>Past Masculine</TableCell>
+              <TableCell>Past Feminine</TableCell>
+              <TableCell>Past Neuter</TableCell>
+              <TableCell>Past Plural</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>{conjugationPastMasculine}</TableCell>
+              <TableCell>{conjugationPastFeminine}</TableCell>
+              <TableCell>{conjugationPasNeuter}</TableCell>
+              <TableCell>{conjugationPastPlural}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-      {oneOfTheArgsIsNotNil(
-        conjugationPresentSingular1st,
-        conjugationPresentSingular2nd,
-        conjugationPresentSingular3rd,
-        conjugationPresentPlural1st,
-        conjugationPresentPlural2nd,
-        conjugationPresentPlural3rd
-      ) && (
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>1st</TableCell>
-                <TableCell>2nd</TableCell>
-                <TableCell>3rd</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>Singular</TableCell>
-                <TableCell>{conjugationPresentSingular1st}</TableCell>
-                <TableCell>{conjugationPresentSingular2nd}</TableCell>
-                <TableCell>{conjugationPresentSingular3rd}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Plural</TableCell>
-                <TableCell>{conjugationPresentPlural1st}</TableCell>
-                <TableCell>{conjugationPresentPlural2nd}</TableCell>
-                <TableCell>{conjugationPresentPlural3rd}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>1st</TableCell>
+              <TableCell>2nd</TableCell>
+              <TableCell>3rd</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Singular</TableCell>
+              <TableCell>{conjugationPresentSingular1st}</TableCell>
+              <TableCell>{conjugationPresentSingular2nd}</TableCell>
+              <TableCell>{conjugationPresentSingular3rd}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Plural</TableCell>
+              <TableCell>{conjugationPresentPlural1st}</TableCell>
+              <TableCell>{conjugationPresentPlural2nd}</TableCell>
+              <TableCell>{conjugationPresentPlural3rd}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-      {oneOfTheArgsIsNotNil(
-        conjugationFutureSingular1st,
-        conjugationFutureSingular2nd,
-        conjugationFutureSingular3rd,
-        conjugationFuturePlural1st,
-        conjugationFuturePlural2nd,
-        conjugationFuturePlural3rd
-      ) && (
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>1st</TableCell>
-                <TableCell>2nd</TableCell>
-                <TableCell>3rd</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>Singular</TableCell>
-                <TableCell>{conjugationFutureSingular1st}</TableCell>
-                <TableCell>{conjugationFutureSingular2nd}</TableCell>
-                <TableCell>{conjugationFutureSingular3rd}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Plural</TableCell>
-                <TableCell>{conjugationFuturePlural1st}</TableCell>
-                <TableCell>{conjugationFuturePlural2nd}</TableCell>
-                <TableCell>{conjugationFuturePlural3rd}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>1st</TableCell>
+              <TableCell>2nd</TableCell>
+              <TableCell>3rd</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Singular</TableCell>
+              <TableCell>{conjugationFutureSingular1st}</TableCell>
+              <TableCell>{conjugationFutureSingular2nd}</TableCell>
+              <TableCell>{conjugationFutureSingular3rd}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Plural</TableCell>
+              <TableCell>{conjugationFuturePlural1st}</TableCell>
+              <TableCell>{conjugationFuturePlural2nd}</TableCell>
+              <TableCell>{conjugationFuturePlural3rd}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-      {oneOfTheArgsIsNotNil(conjugationImperativeSingular, conjugationImperativePlural) && (
         <Table>
           <TableHead>
             <TableRow>
@@ -220,7 +188,7 @@ function VerbDetails(props: Verb): JSX.Element {
             </TableRow>
           </TableBody>
         </Table>
-      )}
+      </TableContainer>
     </div>
   );
 }

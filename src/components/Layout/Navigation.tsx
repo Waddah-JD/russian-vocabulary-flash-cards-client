@@ -16,7 +16,7 @@ function Navigation(): JSX.Element {
       <Link to="/">Home</Link>
       <Link to="/learn">Learn</Link>
       <Link to="/practice">Practice</Link>
-      <Button variant="outlined" onClick={handleSignOut}>
+      <Button variant="outlined" size="small" onClick={handleSignOut}>
         Sign Out
       </Button>
     </nav>
