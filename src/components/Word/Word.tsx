@@ -1,5 +1,5 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsDefined } from "utils/general";
 
@@ -258,16 +258,19 @@ function WordDetails(props: Props): JSX.Element {
       <p>Accented: {noun?.declensionNominativeSingular || verb?.infinitive || accented}</p>
 
       <p>Type: {type}</p>
+
       {englishTranslations.length > 0 && (
-        <p>
-          Translations:{" "}
-          {englishTranslations.map(({ id, translation }) => (
-            <Link key={id} to={`/english-translations/${id}`}>
+        <div style={{ display: "flex", gap: 5 }}>
+          Translations:
+          {englishTranslations.map(({ id, translation }, idx) => (
+            <Link key={id} component={RouterLink} underline="hover" to={`/english-translations/${id}`}>
               {translation}
+              {idx === englishTranslations.length - 1 ? "" : ","}
             </Link>
           ))}
-        </p>
+        </div>
       )}
+
       {type === WordType.NOUN && <NounDetails {...noun} />}
       {type === WordType.VERB && <VerbDetails {...verb} />}
     </div>

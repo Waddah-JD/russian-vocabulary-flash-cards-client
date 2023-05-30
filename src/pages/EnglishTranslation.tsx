@@ -1,6 +1,7 @@
+import { Link } from "@mui/material";
 import { getEnglishTranslationDetails } from "api/english-translations";
 import useFetch from "hooks/useFetch";
-import { Link, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { EnglishTranslation } from "types/words";
 
 function EnglishTranslation(): JSX.Element {
@@ -23,11 +24,13 @@ function EnglishTranslation(): JSX.Element {
   return data ? (
     <div>
       <p>{data.translation}</p>
+
       {data.words.length > 0 ? (
-        <div>
-          {data.words.map(({ id, word }) => (
-            <Link key={id} to={`/words/${id}`}>
-              {word}
+        <div style={{ display: "flex", gap: 5 }}>
+          Translations:
+          {data.words.map(({ id, word }, idx) => (
+            <Link key={id} component={RouterLink} underline="hover" to={`/words/${id}`}>
+              {word} {idx === data.words.length - 1 ? "" : ","}
             </Link>
           ))}
         </div>

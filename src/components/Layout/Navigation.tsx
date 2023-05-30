@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { signOut } from "api/auth";
 import { AuthContext } from "contexts/Auth";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function Navigation(): JSX.Element {
   const { userIsAuthenticated } = useContext(AuthContext);
@@ -13,17 +13,24 @@ function Navigation(): JSX.Element {
 
   return userIsAuthenticated ? (
     <nav style={{ display: "flex", justifyContent: "space-around", gap: 10, alignItems: "center" }}>
-      <Link to="/">Home</Link>
-      <Link to="/learn">Learn</Link>
-      <Link to="/practice">Practice</Link>
+      <Link component={RouterLink} to="/learn" underline="none">
+        Learn
+      </Link>
+      <Link component={RouterLink} to="/practice" underline="none">
+        Practice
+      </Link>
       <Button variant="outlined" size="small" onClick={handleSignOut}>
         Sign Out
       </Button>
     </nav>
   ) : (
     <nav style={{ display: "flex", justifyContent: "space-around", gap: 10, alignItems: "center" }}>
-      <Link to="/sign-in">Sign In</Link>
-      <Link to="/sign-up">Sign Up</Link>
+      <Link component={RouterLink} to="/sign-in" underline="none">
+        Sign In
+      </Link>
+      <Link component={RouterLink} to="/sign-up" underline="none">
+        Sign Up
+      </Link>
     </nav>
   );
 }
