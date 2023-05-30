@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsNotNil } from "utils/general";
@@ -27,47 +28,49 @@ function NounDetails(props: Noun): JSX.Element {
     <div>
       <p>Gender: {gender}</p>
       <p>Animate: {isAnimate ? "✅" : "❌"}</p>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Singular</th>
-            <th>Plural</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Nominative</td>
-            <td>{declensionNominativeSingular}</td>
-            <td>{declensionNominativePlural}</td>
-          </tr>
-          <tr>
-            <td>Genitive</td>
-            <td>{declensionGenitiveSingular}</td>
-            <td>{declensionGenitivePlural}</td>
-          </tr>
-          <tr>
-            <td>Dative</td>
-            <td>{declensionDativeSingular}</td>
-            <td>{declensionDativePlural}</td>
-          </tr>
-          <tr>
-            <td>Accusative</td>
-            <td>{declensionAccusativeSingular}</td>
-            <td>{declensionAccusativePlural}</td>
-          </tr>
-          <tr>
-            <td>Instrumental</td>
-            <td>{declensionInstrumentalSingular}</td>
-            <td>{declensionInstrumentalPlural}</td>
-          </tr>
-          <tr>
-            <td>Prepositional</td>
-            <td>{declensionPrepositionalSingular}</td>
-            <td>{declensionPrepositionalPlural}</td>
-          </tr>
-        </tbody>
-      </table>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>Singular</TableCell>
+              <TableCell>Plural</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Nominative</TableCell>
+              <TableCell>{declensionNominativeSingular}</TableCell>
+              <TableCell>{declensionNominativePlural}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Genitive</TableCell>
+              <TableCell>{declensionGenitiveSingular}</TableCell>
+              <TableCell>{declensionGenitivePlural}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Dative</TableCell>
+              <TableCell>{declensionDativeSingular}</TableCell>
+              <TableCell>{declensionDativePlural}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Accusative</TableCell>
+              <TableCell>{declensionAccusativeSingular}</TableCell>
+              <TableCell>{declensionAccusativePlural}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Instrumental</TableCell>
+              <TableCell>{declensionInstrumentalSingular}</TableCell>
+              <TableCell>{declensionInstrumentalPlural}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Prepositional</TableCell>
+              <TableCell>{declensionPrepositionalSingular}</TableCell>
+              <TableCell>{declensionPrepositionalPlural}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
@@ -106,24 +109,28 @@ function VerbDetails(props: Verb): JSX.Element {
         conjugationPasNeuter,
         conjugationPastPlural
       ) && (
-        <table>
-          <thead>
-            <tr>
-              <th>Past Masculine</th>
-              <th>Past Feminine</th>
-              <th>Past Neuter</th>
-              <th>Past Plural</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{conjugationPastMasculine}</td>
-              <td>{conjugationPastFeminine}</td>
-              <td>{conjugationPasNeuter}</td>
-              <td>{conjugationPastPlural}</td>
-            </tr>
-          </tbody>
-        </table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>Past Masculine</TableCell>
+                <TableCell>Past Feminine</TableCell>
+                <TableCell>Past Neuter</TableCell>
+                <TableCell>Past Plural</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>{conjugationPastMasculine}</TableCell>
+                <TableCell>{conjugationPastFeminine}</TableCell>
+                <TableCell>{conjugationPasNeuter}</TableCell>
+                <TableCell>{conjugationPastPlural}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
 
       {oneOfTheArgsIsNotNil(
@@ -134,30 +141,32 @@ function VerbDetails(props: Verb): JSX.Element {
         conjugationPresentPlural2nd,
         conjugationPresentPlural3rd
       ) && (
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>1st</th>
-              <th>2nd</th>
-              <th>3rd</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Singular</td>
-              <td>{conjugationPresentSingular1st}</td>
-              <td>{conjugationPresentSingular2nd}</td>
-              <td>{conjugationPresentSingular3rd}</td>
-            </tr>
-            <tr>
-              <td>Plural</td>
-              <td>{conjugationPresentPlural1st}</td>
-              <td>{conjugationPresentPlural2nd}</td>
-              <td>{conjugationPresentPlural3rd}</td>
-            </tr>
-          </tbody>
-        </table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>1st</TableCell>
+                <TableCell>2nd</TableCell>
+                <TableCell>3rd</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>Singular</TableCell>
+                <TableCell>{conjugationPresentSingular1st}</TableCell>
+                <TableCell>{conjugationPresentSingular2nd}</TableCell>
+                <TableCell>{conjugationPresentSingular3rd}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Plural</TableCell>
+                <TableCell>{conjugationPresentPlural1st}</TableCell>
+                <TableCell>{conjugationPresentPlural2nd}</TableCell>
+                <TableCell>{conjugationPresentPlural3rd}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
 
       {oneOfTheArgsIsNotNil(
@@ -168,47 +177,49 @@ function VerbDetails(props: Verb): JSX.Element {
         conjugationFuturePlural2nd,
         conjugationFuturePlural3rd
       ) && (
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>1st</th>
-              <th>2nd</th>
-              <th>3rd</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Singular</td>
-              <td>{conjugationFutureSingular1st}</td>
-              <td>{conjugationFutureSingular2nd}</td>
-              <td>{conjugationFutureSingular3rd}</td>
-            </tr>
-            <tr>
-              <td>Plural</td>
-              <td>{conjugationFuturePlural1st}</td>
-              <td>{conjugationFuturePlural2nd}</td>
-              <td>{conjugationFuturePlural3rd}</td>
-            </tr>
-          </tbody>
-        </table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>1st</TableCell>
+                <TableCell>2nd</TableCell>
+                <TableCell>3rd</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>Singular</TableCell>
+                <TableCell>{conjugationFutureSingular1st}</TableCell>
+                <TableCell>{conjugationFutureSingular2nd}</TableCell>
+                <TableCell>{conjugationFutureSingular3rd}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Plural</TableCell>
+                <TableCell>{conjugationFuturePlural1st}</TableCell>
+                <TableCell>{conjugationFuturePlural2nd}</TableCell>
+                <TableCell>{conjugationFuturePlural3rd}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
 
       {oneOfTheArgsIsNotNil(conjugationImperativeSingular, conjugationImperativePlural) && (
-        <table>
-          <thead>
-            <tr>
-              <th>Imperative Singular</th>
-              <th>Imperative Plural</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{conjugationImperativeSingular}</td>
-              <td>{conjugationImperativePlural}</td>
-            </tr>
-          </tbody>
-        </table>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Imperative Singular</TableCell>
+              <TableCell>Imperative Plural</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>{conjugationImperativeSingular}</TableCell>
+              <TableCell>{conjugationImperativePlural}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       )}
     </div>
   );
