@@ -42,7 +42,17 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
 
 function PrevNextPagerController(props: PrevNextPagerControllerProps): JSX.Element {
   return (
-    <div>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        margin: 10,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        gap: 10,
+      }}
+    >
       <Button
         size="small"
         variant="outlined"

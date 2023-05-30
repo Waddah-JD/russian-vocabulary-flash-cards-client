@@ -6,7 +6,7 @@ const theme = createTheme({
   },
   components: {
     MuiTable: { styleOverrides: { root: { marginBlock: "10px", maxWidth: 600 } } },
-    MuiTableCell: { styleOverrides: { root: { border: "1px solid black" } } },
+    MuiTableCell: { styleOverrides: { root: { border: "1px solid black", textAlign: "center" } } },
   },
 });
 

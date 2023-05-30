@@ -37,7 +37,17 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
   }
 
   return (
-    <div>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        margin: 10,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        gap: 10,
+      }}
+    >
       <Button variant="outlined" size="small" type="button" onClick={submitFailedPractice}>
         Fail
       </Button>

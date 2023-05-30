@@ -40,12 +40,12 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   return done ? (
     <p>Added Successfully!</p>
   ) : (
-    <form onSubmit={handleAddToCollectionSubmit}>
-      <TextField multiline label="Notes" value={notes} onChange={handleSetNote} />
+    <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+      <TextField multiline label="Notes" value={notes} onChange={handleSetNote} style={{ flexGrow: 1 }} />
       <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
-        Add
+        Add To Collection
       </Button>
-    </form>
+    </div>
   );
 }
 
