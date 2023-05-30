@@ -54,32 +54,32 @@ function NounDetails(props: Noun): JSX.Element {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Nominative</TableCell>
+                <TableCell variant="head">Nominative</TableCell>
                 <TableCell>{declensionNominativeSingular}</TableCell>
                 <TableCell>{declensionNominativePlural}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Genitive</TableCell>
+                <TableCell variant="head">Genitive</TableCell>
                 <TableCell>{declensionGenitiveSingular}</TableCell>
                 <TableCell>{declensionGenitivePlural}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Dative</TableCell>
+                <TableCell variant="head">Dative</TableCell>
                 <TableCell>{declensionDativeSingular}</TableCell>
                 <TableCell>{declensionDativePlural}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Accusative</TableCell>
+                <TableCell variant="head">Accusative</TableCell>
                 <TableCell>{declensionAccusativeSingular}</TableCell>
                 <TableCell>{declensionAccusativePlural}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Instrumental</TableCell>
+                <TableCell variant="head">Instrumental</TableCell>
                 <TableCell>{declensionInstrumentalSingular}</TableCell>
                 <TableCell>{declensionInstrumentalPlural}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Prepositional</TableCell>
+                <TableCell variant="head">Prepositional</TableCell>
                 <TableCell>{declensionPrepositionalSingular}</TableCell>
                 <TableCell>{declensionPrepositionalPlural}</TableCell>
               </TableRow>
@@ -138,7 +138,7 @@ function VerbDetails(props: Verb): JSX.Element {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Past</TableCell>
+                <TableCell variant="head">Past</TableCell>
                 <TableCell>{conjugationPastMasculine}</TableCell>
                 <TableCell>{conjugationPastFeminine}</TableCell>
                 <TableCell>{conjugationPasNeuter}</TableCell>
@@ -169,13 +169,13 @@ function VerbDetails(props: Verb): JSX.Element {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Singular</TableCell>
+                <TableCell variant="head">Present Singular</TableCell>
                 <TableCell>{conjugationPresentSingular1st}</TableCell>
                 <TableCell>{conjugationPresentSingular2nd}</TableCell>
                 <TableCell>{conjugationPresentSingular3rd}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Plural</TableCell>
+                <TableCell variant="head">Present Plural</TableCell>
                 <TableCell>{conjugationPresentPlural1st}</TableCell>
                 <TableCell>{conjugationPresentPlural2nd}</TableCell>
                 <TableCell>{conjugationPresentPlural3rd}</TableCell>
@@ -205,13 +205,13 @@ function VerbDetails(props: Verb): JSX.Element {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Singular</TableCell>
+                <TableCell variant="head">Future Singular</TableCell>
                 <TableCell>{conjugationFutureSingular1st}</TableCell>
                 <TableCell>{conjugationFutureSingular2nd}</TableCell>
                 <TableCell>{conjugationFutureSingular3rd}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Plural</TableCell>
+                <TableCell variant="head">Future Plural</TableCell>
                 <TableCell>{conjugationFuturePlural1st}</TableCell>
                 <TableCell>{conjugationFuturePlural2nd}</TableCell>
                 <TableCell>{conjugationFuturePlural3rd}</TableCell>
@@ -233,7 +233,7 @@ function VerbDetails(props: Verb): JSX.Element {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Imperative</TableCell>
+                <TableCell variant="head">Imperative</TableCell>
                 <TableCell>{conjugationImperativeSingular}</TableCell>
                 <TableCell>{conjugationImperativePlural}</TableCell>
               </TableRow>
