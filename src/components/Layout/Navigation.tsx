@@ -12,7 +12,7 @@ function Navigation(): JSX.Element {
   }
 
   return userIsAuthenticated ? (
-    <nav>
+    <nav style={{ display: "flex", justifyContent: "space-around", gap: 10, alignItems: "center" }}>
       <Link to="/">Home</Link>
       <Link to="/learn">Learn</Link>
       <Link to="/practice">Practice</Link>
@@ -21,7 +21,7 @@ function Navigation(): JSX.Element {
       </Button>
     </nav>
   ) : (
-    <nav>
+    <nav style={{ display: "flex", justifyContent: "space-around", gap: 10, alignItems: "center" }}>
       <Link to="/sign-in">Sign In</Link>
       <Link to="/sign-up">Sign Up</Link>
     </nav>

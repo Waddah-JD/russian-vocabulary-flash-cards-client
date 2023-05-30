@@ -32,7 +32,7 @@ function EmailAndPassword(props: Props): JSX.Element {
       <TextField
         type="password"
         size="small"
-        label="password"
+        label="Password"
         variant="outlined"
         value={password}
         onChange={handlePasswordChange}
