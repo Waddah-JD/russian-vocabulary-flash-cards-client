@@ -26,7 +26,7 @@ function NounDetails(props: Noun): JSX.Element {
   return (
     <div>
       <p>Gender: {gender}</p>
-      <p>Animate: {isAnimate}</p>
+      <p>Animate: {isAnimate ? "✅" : "❌"}</p>
       <table>
         <thead>
           <tr>
@@ -98,7 +98,7 @@ function VerbDetails(props: Verb): JSX.Element {
   return (
     <div>
       <p>Infinitive: {infinitive}</p>
-      <p>Imperfective: {isImperfective}</p>
+      <p>Imperfect: {isImperfective ? "✅" : "❌"}</p>
 
       {oneOfTheArgsIsNotNil(
         conjugationPastMasculine,
