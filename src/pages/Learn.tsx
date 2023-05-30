@@ -1,5 +1,6 @@
 import { learnWords } from "api/words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
+import PrevNextPager from "components/Pagers/PrevNextPager";
 import LearnWord from "components/Word/LearnWord";
 import useFetch from "hooks/useFetch";
 import { Word } from "types/words";
@@ -21,15 +22,8 @@ function Learn(): JSX.Element {
   return (
     <ProtectedRouteLayout>
       <h2>Learn</h2>
-      {words && words.length > 0 ? (
-        <div>
-          {words.map((data) => {
-            return <LearnWord key={data.id} details={data} />;
-          })}
-        </div>
-      ) : (
-        <div>NO RESULTS</div> // TODO
-      )}
+
+      <PrevNextPager data={words} pageView={LearnWord} />
     </ProtectedRouteLayout>
   );
 }
