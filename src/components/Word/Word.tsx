@@ -254,7 +254,9 @@ function WordDetails(props: Props): JSX.Element {
         {id}: {word}
       </h3>
       <p>Pronunciation: {pronunciation}</p>
-      <p>Accented: {accented}</p>
+
+      <p>Accented: {noun?.declensionNominativeSingular || verb?.infinitive || accented}</p>
+
       <p>Type: {type}</p>
       {englishTranslations.length > 0 && (
         <p>
