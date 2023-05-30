@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { submitPracticeWordResult } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
@@ -28,21 +29,21 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
   }
 
   if (loading) {
-    return <p style={{ color: "green" }}>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p style={{ color: "red" }}>Something went wrong!</p>;
+    return <p>Something went wrong!</p>;
   }
 
   return (
     <div>
-      <button type="button" onClick={submitFailedPractice}>
+      <Button variant="outlined" size="small" type="button" onClick={submitFailedPractice}>
         Fail
-      </button>
-      <button type="button" onClick={submitSuccessPractice}>
+      </Button>
+      <Button variant="outlined" size="small" type="button" onClick={submitSuccessPractice}>
         Success
-      </button>
+      </Button>
     </div>
   );
 }

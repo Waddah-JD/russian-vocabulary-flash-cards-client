@@ -229,7 +229,7 @@ function WordDetails(props: Props): JSX.Element {
         <p>
           Translations:{" "}
           {englishTranslations.map(({ id, translation }) => (
-            <Link style={{ paddingInlineEnd: "5px" }} key={id} to={`/english-translations/${id}`}>
+            <Link key={id} to={`/english-translations/${id}`}>
               {translation}
             </Link>
           ))}

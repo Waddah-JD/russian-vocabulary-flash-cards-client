@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { signOut } from "api/auth";
 import { AuthContext } from "contexts/Auth";
 import { useContext } from "react";
@@ -15,7 +16,9 @@ function Navigation(): JSX.Element {
       <Link to="/">Home</Link>
       <Link to="/learn">Learn</Link>
       <Link to="/practice">Practice</Link>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <Button variant="outlined" onClick={handleSignOut}>
+        Sign Out
+      </Button>
     </nav>
   ) : (
     <nav>

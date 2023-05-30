@@ -12,12 +12,12 @@ function EnglishTranslation(): JSX.Element {
 
   if (loading) {
     // TODO
-    return <p style={{ color: "green" }}>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
     // TODO
-    return <p style={{ color: "red" }}>Something went wrong!</p>;
+    return <p>Something went wrong!</p>;
   }
 
   return data ? (
@@ -26,7 +26,7 @@ function EnglishTranslation(): JSX.Element {
       {data.words.length > 0 ? (
         <div>
           {data.words.map(({ id, word }) => (
-            <Link style={{ paddingInlineEnd: "5px" }} key={id} to={`/words/${id}`}>
+            <Link key={id} to={`/words/${id}`}>
               {word}
             </Link>
           ))}

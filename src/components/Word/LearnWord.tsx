@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Button, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
 import useFetch from "hooks/useFetch";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Word } from "types/words";
 
 import WordDetails from "./Word";
@@ -23,22 +24,27 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
     setNotes(e.target.value);
   }
 
+  function handleAddToCollectionSubmit(e: FormEvent): void {
+    e.preventDefault();
+    trigger(props.id, notes);
+  }
+
   if (loading) {
-    return <p style={{ color: "green" }}>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p style={{ color: "red" }}>Something went wrong!</p>;
+    return <p>Something went wrong!</p>;
   }
 
   return done ? (
     <p>Added Successfully!</p>
   ) : (
-    <form>
-      <textarea value={notes} onChange={handleSetNote} />
-      <button type="button" onClick={() => trigger()}>
+    <form onSubmit={handleAddToCollectionSubmit}>
+      <TextField multiline label="Notes" value={notes} onChange={handleSetNote} />
+      <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
         Add
-      </button>
+      </Button>
     </form>
   );
 }

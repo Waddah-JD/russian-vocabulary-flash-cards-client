@@ -13,12 +13,12 @@ function WordPage(): JSX.Element {
 
   if (loading) {
     // TODO
-    return <p style={{ color: "green" }}>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
     // TODO
-    return <p style={{ color: "red" }}>Something went wrong!</p>;
+    return <p>Something went wrong!</p>;
   }
 
   return data ? <WordDetails details={data} /> : <div>No results</div>;

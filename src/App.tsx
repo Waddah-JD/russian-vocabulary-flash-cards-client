@@ -1,3 +1,5 @@
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 import SplashScreen from "components/SplashScreen";
 import AuthContextProvider, { AuthContext } from "contexts/Auth";
 import { useContext } from "react";
@@ -5,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import { isNil } from "utils/types";
 
 import router from "./router";
+import theme from "./theme";
 
 function Main(): JSX.Element {
   const { isAuthenticating } = useContext(AuthContext);
@@ -19,9 +22,12 @@ function Main(): JSX.Element {
 
 function App(): JSX.Element {
   return (
-    <AuthContextProvider>
-      <Main />
-    </AuthContextProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AuthContextProvider>
+        <Main />
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
 

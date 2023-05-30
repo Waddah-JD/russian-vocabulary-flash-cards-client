@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
 
 type Props<T> = {
@@ -42,12 +43,12 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
 function PrevNextPagerController(props: PrevNextPagerControllerProps): JSX.Element {
   return (
     <div>
-      <button disabled={props.moveToPreviousPageIsDisabled} onClick={props.moveToPreviousPage}>
+      <Button variant="outlined" disabled={props.moveToPreviousPageIsDisabled} onClick={props.moveToPreviousPage}>
         prev
-      </button>
-      <button disabled={props.moveToNextPageIsDisabled} onClick={props.moveToNextPage}>
+      </Button>
+      <Button variant="outlined" disabled={props.moveToNextPageIsDisabled} onClick={props.moveToNextPage}>
         next
-      </button>
+      </Button>
     </div>
   );
 }
