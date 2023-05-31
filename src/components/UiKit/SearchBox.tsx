@@ -11,10 +11,14 @@ type Option = {
 type Props<T> = {
   keyLabel: keyof T;
   searchFunction: (searchTerm: string) => Promise<T[]>;
+  width?: number;
+  throttleRate?: number;
 };
 
 function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
-  const WIDTH = 300;
+  let throttledCall: NodeJS.Timeout;
+  const WIDTH = props.width || 300;
+  const THROTTLE_RATE = props.throttleRate || 0;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -29,9 +33,17 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   }
 
   useEffect(() => {
-    if (searchTerm) {
-      handleSearch();
+    if (throttledCall) {
+      clearTimeout(throttledCall);
     }
+
+    throttledCall = setTimeout(() => {
+      if (searchTerm) {
+        handleSearch();
+      }
+    }, THROTTLE_RATE);
+
+    return () => clearTimeout(throttledCall);
   }, [searchTerm]);
 
   useEffect(() => {
