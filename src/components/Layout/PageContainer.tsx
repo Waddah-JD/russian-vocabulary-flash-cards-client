@@ -1,9 +1,9 @@
 import { Box, styled } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
-import Navigation from "../components/Layout/Navigation";
+import Navigation from "./Navigation";
 
-const NavBar = styled("div")(() => {
+const Menu = styled("div")(() => {
   return {
     display: "flex",
     alignItems: "center",
@@ -11,16 +11,16 @@ const NavBar = styled("div")(() => {
   };
 });
 
-function Homepage(): JSX.Element {
+function PageContainer(): JSX.Element {
   return (
     <Box p={1}>
-      <NavBar>
+      <Menu>
         <h1>Russian Vocabulary Flashcards</h1>
         <Navigation />
-      </NavBar>
+      </Menu>
       <Outlet />
     </Box>
   );
 }
 
-export default Homepage;
+export default PageContainer;
