@@ -1,6 +1,6 @@
 import { CircularProgress, TextField } from "@mui/material";
 import { styled } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Option = {
   id: string | number;
@@ -86,6 +86,8 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   const width = props.width || 300;
   const THROTTLE_RATE = props.throttleRate || 0;
 
+  const containerRef = useRef<HTMLInputElement>(null);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -127,9 +129,13 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   function handleCloseList(): void {
     setIsOpen(false);
   }
+  function handleCloseListAndUnfocusBox(): void {
+    handleCloseList();
+    containerRef.current?.blur();
+  }
 
   return (
-    <div onBlur={handleCloseList}>
+    <div>
       <TextField
         size="small"
         placeholder="enter keywords here.."
@@ -137,13 +143,15 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
         value={searchTerm}
         onChange={handleSearchTermChange}
         onFocus={handleOpenList}
+        onBlur={handleCloseList}
+        inputRef={containerRef}
         InputProps={{
           endAdornment: <>{isLoading ? <CircularProgress color="inherit" size={20} /> : null}</>,
         }}
       />
 
       {isOpen && searchTerm && (
-        <ListBox<T> values={options} isLoading={isLoading} width={width} closeList={handleCloseList} />
+        <ListBox<T> values={options} isLoading={isLoading} width={width} closeList={handleCloseListAndUnfocusBox} />
       )}
     </div>
   );

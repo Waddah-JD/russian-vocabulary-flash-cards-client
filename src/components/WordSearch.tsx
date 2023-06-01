@@ -44,7 +44,6 @@ async function handleEnglishWordSearch(
   navigationFn: NavigateFunction
 ): Promise<WordSearchResult[]> {
   const result = await searchEnglishTranslation(searchTerm);
-  console.log(result);
   if (!result?.data) return [];
   return result.data.map(({ id, translation }) => {
     return {
