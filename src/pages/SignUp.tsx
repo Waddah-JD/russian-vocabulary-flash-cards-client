@@ -1,4 +1,5 @@
-import { signUp } from "api/auth";
+import { getIdToken, signUp } from "api/auth";
+import { createUser } from "api/users";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import { useState } from "react";
@@ -15,6 +16,9 @@ function SignUp(): JSX.Element {
   }
   async function handleSignUp(): Promise<void> {
     await signUp(email, password);
+    const token = await getIdToken();
+    if (!token) throw new Error(); //TODO
+    await createUser(token);
   }
   return (
     <UnauthenticatedOnlyRouteLayout>

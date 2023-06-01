@@ -37,7 +37,7 @@ function EmailAndPassword(props: Props): JSX.Element {
         value={password}
         onChange={handlePasswordChange}
       />
-      <Button type="submit" variant="contained" size="small" onClick={handleSubmitForm}>
+      <Button type="submit" variant="contained" size="small">
         {/* TODO add disable on validation / submitting .. etc */}
         {submitButtonLabel || "submit"}
       </Button>
