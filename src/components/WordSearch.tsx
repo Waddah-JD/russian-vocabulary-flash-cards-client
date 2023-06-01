@@ -3,7 +3,7 @@ import { searchWords } from "api/words";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Word } from "types/words";
 
-import SearchBox from "./UIKit/SearchBox";
+import SearchBox from "./UiKit/SearchBox";
 
 type WordSearchResult = Pick<Word, "id"> & {
   label: string;
