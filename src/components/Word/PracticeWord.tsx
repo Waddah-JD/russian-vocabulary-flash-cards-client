@@ -17,8 +17,6 @@ type SubmitPracticeResultFormProps = {
 
 const PracticeResultFormContainer = styled("div")(() => {
   return {
-    position: "absolute",
-    bottom: 0,
     margin: 10,
     width: "100%",
     display: "flex",

@@ -248,6 +248,7 @@ function VerbDetails(props: Verb): JSX.Element {
 const TranslationsContainer = styled("div")(() => {
   return {
     display: "flex",
+    flexWrap: "wrap",
     gap: 5,
   };
 });

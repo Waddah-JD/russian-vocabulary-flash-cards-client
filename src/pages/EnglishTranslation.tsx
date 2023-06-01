@@ -9,6 +9,7 @@ const TranslationsContainer = styled("div")(() => {
   return {
     display: "flex",
     gap: 5,
+    flexWrap: "wrap",
   };
 });
 
@@ -42,7 +43,8 @@ function EnglishTranslation(): JSX.Element {
           Translations:
           {data.words.map(({ id, word }, idx) => (
             <Link key={id} component={RouterLink} underline="hover" to={`/words/${id}`}>
-              {word} {idx === data.words.length - 1 ? "" : ","}
+              {word}
+              {idx === data.words.length - 1 ? "" : ","}
             </Link>
           ))}
         </TranslationsContainer>

@@ -42,8 +42,6 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
 
 const PrevNextPagerControllerContainer = styled("div")(() => {
   return {
-    position: "absolute",
-    bottom: 0,
     margin: 10,
     width: "100%",
     display: "flex",

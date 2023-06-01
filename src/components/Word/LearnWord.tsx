@@ -20,6 +20,7 @@ const AddToUserCollectionFormContainer = styled("div")(() => {
     display: "flex",
     flexDirection: "row",
     gap: 10,
+    marginBlock: 10,
   };
 });
 
@@ -54,7 +55,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   return done ? (
     <p>Added Successfully!</p>
   ) : (
-    <AddToUserCollectionFormContainer>
+    <AddToUserCollectionFormContainer sx={{ flexDirection: { xs: "column", sm: "row" } }}>
       <AddToUserCollectionFormTextField multiline label="Notes" value={notes} onChange={handleSetNote} />
       <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
         Add To Collection
