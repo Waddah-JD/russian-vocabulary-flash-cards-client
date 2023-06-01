@@ -7,7 +7,7 @@ import { PracticeWord } from "types/words";
 
 function Practice(): JSX.Element {
   // TODO add a selector for batch number
-  const { data: words, error, loading } = useFetch<PracticeWord[]>(getPracticeWords, [10], { triggerOnMount: true });
+  const { data, error, loading } = useFetch<PracticeWord[]>(() => getPracticeWords(10), { triggerOnMount: true });
 
   if (loading) {
     // TODO
@@ -22,7 +22,7 @@ function Practice(): JSX.Element {
   return (
     <ProtectedRouteLayout>
       <h2>Practice</h2>
-      <NextOnlyPager data={words?.map((it) => it.word)} pageView={PracticeWordDetails} />
+      <NextOnlyPager data={data?.map((it) => it.word)} pageView={PracticeWordDetails} />
     </ProtectedRouteLayout>
   );
 }

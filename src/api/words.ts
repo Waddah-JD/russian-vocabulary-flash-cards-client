@@ -4,7 +4,7 @@ import axios from "./axios";
 
 const path = `/v1/words`;
 
-export async function getWordDetails(id: number): Promise<Word> {
+export async function getWordDetails(id: string): Promise<Word> {
   const { data } = await axios.get<Word>(`${path}/${id}`);
   return data;
 }

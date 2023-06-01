@@ -1,7 +1,6 @@
 import { Link, styled } from "@mui/material";
 import { getEnglishTranslationDetails } from "api/english-translations";
 import useFetch from "hooks/useFetch";
-import { useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { EnglishTranslation } from "types/words";
 
@@ -16,13 +15,12 @@ const TranslationsContainer = styled("div")(() => {
 function EnglishTranslation(): JSX.Element {
   const { id } = useParams();
 
-  const { loading, error, data, trigger } = useFetch<EnglishTranslation>(getEnglishTranslationDetails, [id]);
+  if (!id) return <></>; // TODO
 
-  useEffect(() => {
-    if (id) {
-      trigger(id);
-    }
-  }, [id]);
+  const { loading, error, data } = useFetch<EnglishTranslation>(
+    (): Promise<EnglishTranslation> => getEnglishTranslationDetails(id),
+    { deps: [id], triggerOnMount: true }
+  );
 
   if (loading) {
     // TODO

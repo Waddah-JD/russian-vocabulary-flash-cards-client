@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, styled, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
 import useFetch from "hooks/useFetch";
+import { useEffect } from "react";
 import { FormEvent, useState } from "react";
 import { Word } from "types/words";
 
@@ -33,7 +33,13 @@ const AddToUserCollectionFormTextField = styled(TextField)(() => {
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
   const [notes, setNotes] = useState<string>();
 
-  const { loading, error, done, trigger } = useFetch<void>(addWordToUserCollection, [props.id, notes]);
+  useEffect(() => {
+    setNotes(undefined);
+  }, [props.id]);
+
+  const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, notes), {
+    deps: [props.id],
+  });
 
   function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
     setNotes(e.target.value);
@@ -41,7 +47,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
 
   function handleAddToCollectionSubmit(e: FormEvent): void {
     e.preventDefault();
-    trigger(props.id, notes);
+    trigger();
   }
 
   if (loading) {

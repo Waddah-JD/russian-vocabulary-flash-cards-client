@@ -26,15 +26,27 @@ const PracticeResultFormContainer = styled("div")(() => {
 });
 
 function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Element {
-  const { loading, error, trigger } = useFetch<void>(submitPracticeWordResult);
+  const {
+    loading: loadingSuccess,
+    error: errorSuccess,
+    trigger: triggerSuccess,
+  } = useFetch<void>(() => submitPracticeWordResult(props.id, true));
+  const {
+    loading: loadingFail,
+    error: errorFail,
+    trigger: triggerFail,
+  } = useFetch<void>(() => submitPracticeWordResult(props.id, false));
+
+  const loading = loadingSuccess || loadingFail;
+  const error = errorSuccess || errorFail;
 
   async function submitSuccessPractice(): Promise<void> {
-    await trigger(props.id, true);
+    await triggerSuccess();
     props.moveToNextPage();
   }
 
   async function submitFailedPractice(): Promise<void> {
-    await trigger(props.id, false);
+    await triggerFail();
     props.moveToNextPage();
   }
 
