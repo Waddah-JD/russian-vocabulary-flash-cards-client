@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import { useState } from "react";
 
 type Props<T> = {
@@ -40,19 +40,21 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
   );
 }
 
+const PrevNextPagerControllerContainer = styled("div")(() => {
+  return {
+    position: "absolute",
+    bottom: 0,
+    margin: 10,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    gap: 10,
+  };
+});
+
 function PrevNextPagerController(props: PrevNextPagerControllerProps): JSX.Element {
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        margin: 10,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        gap: 10,
-      }}
-    >
+    <PrevNextPagerControllerContainer>
       <Button
         size="small"
         variant="outlined"
@@ -64,7 +66,7 @@ function PrevNextPagerController(props: PrevNextPagerControllerProps): JSX.Eleme
       <Button size="small" variant="outlined" disabled={props.moveToNextPageIsDisabled} onClick={props.moveToNextPage}>
         next
       </Button>
-    </div>
+    </PrevNextPagerControllerContainer>
   );
 }
 

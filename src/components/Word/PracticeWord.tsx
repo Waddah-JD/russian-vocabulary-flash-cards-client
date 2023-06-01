@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import { submitPracticeWordResult } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
@@ -14,6 +14,18 @@ type SubmitPracticeResultFormProps = {
   id: Word["id"];
   moveToNextPage: Props["moveToNextPage"];
 };
+
+const PracticeResultFormContainer = styled("div")(() => {
+  return {
+    position: "absolute",
+    bottom: 0,
+    margin: 10,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    gap: 10,
+  };
+});
 
 function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Element {
   const { loading, error, trigger } = useFetch<void>(submitPracticeWordResult);
@@ -37,24 +49,14 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
   }
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        margin: 10,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        gap: 10,
-      }}
-    >
+    <PracticeResultFormContainer>
       <Button variant="outlined" size="small" type="button" onClick={submitFailedPractice}>
         Fail
       </Button>
       <Button variant="outlined" size="small" type="button" onClick={submitSuccessPractice}>
         Success
       </Button>
-    </div>
+    </PracticeResultFormContainer>
   );
 }
 

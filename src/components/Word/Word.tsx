@@ -1,4 +1,4 @@
-import { Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Link, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsDefined } from "utils/general";
@@ -245,6 +245,13 @@ function VerbDetails(props: Verb): JSX.Element {
   );
 }
 
+const TranslationsContainer = styled("div")(() => {
+  return {
+    display: "flex",
+    gap: 5,
+  };
+});
+
 function WordDetails(props: Props): JSX.Element {
   const { id, word, pronunciation, accented, type, noun, verb, englishTranslations } = props.details;
 
@@ -260,7 +267,7 @@ function WordDetails(props: Props): JSX.Element {
       <p>Type: {type}</p>
 
       {englishTranslations.length > 0 && (
-        <div style={{ display: "flex", gap: 5 }}>
+        <TranslationsContainer>
           Translations:
           {englishTranslations.map(({ id, translation }, idx) => (
             <Link key={id} component={RouterLink} underline="hover" to={`/english-translations/${id}`}>
@@ -268,7 +275,7 @@ function WordDetails(props: Props): JSX.Element {
               {idx === englishTranslations.length - 1 ? "" : ","}
             </Link>
           ))}
-        </div>
+        </TranslationsContainer>
       )}
 
       {type === WordType.NOUN && <NounDetails {...noun} />}

@@ -1,9 +1,16 @@
-import { Link } from "@mui/material";
+import { Link, styled } from "@mui/material";
 import { getEnglishTranslationDetails } from "api/english-translations";
 import useFetch from "hooks/useFetch";
 import { useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { EnglishTranslation } from "types/words";
+
+const TranslationsContainer = styled("div")(() => {
+  return {
+    display: "flex",
+    gap: 5,
+  };
+});
 
 function EnglishTranslation(): JSX.Element {
   const { id } = useParams();
@@ -31,14 +38,14 @@ function EnglishTranslation(): JSX.Element {
       <p>{data.translation}</p>
 
       {data.words.length > 0 ? (
-        <div style={{ display: "flex", gap: 5 }}>
+        <TranslationsContainer>
           Translations:
           {data.words.map(({ id, word }, idx) => (
             <Link key={id} component={RouterLink} underline="hover" to={`/words/${id}`}>
               {word} {idx === data.words.length - 1 ? "" : ","}
             </Link>
           ))}
-        </div>
+        </TranslationsContainer>
       ) : (
         <div>No results</div>
       )}

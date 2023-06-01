@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Button, TextField } from "@mui/material";
+import { Button, styled, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
 import useFetch from "hooks/useFetch";
 import { FormEvent, useState } from "react";
@@ -14,6 +14,20 @@ type Props = {
 type AddToUserCollectionFormProps = {
   id: Word["id"];
 };
+
+const AddToUserCollectionFormContainer = styled("div")(() => {
+  return {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+  };
+});
+
+const AddToUserCollectionFormTextField = styled(TextField)(() => {
+  return {
+    flexGrow: 1,
+  };
+});
 
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
   const [notes, setNotes] = useState<string>();
@@ -40,12 +54,12 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   return done ? (
     <p>Added Successfully!</p>
   ) : (
-    <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
-      <TextField multiline label="Notes" value={notes} onChange={handleSetNote} style={{ flexGrow: 1 }} />
+    <AddToUserCollectionFormContainer>
+      <AddToUserCollectionFormTextField multiline label="Notes" value={notes} onChange={handleSetNote} />
       <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
         Add To Collection
       </Button>
-    </div>
+    </AddToUserCollectionFormContainer>
   );
 }
 

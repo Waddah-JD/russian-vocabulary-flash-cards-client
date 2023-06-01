@@ -1,15 +1,23 @@
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 import Navigation from "../components/Layout/Navigation";
 
+const NavBar = styled("div")(() => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+});
+
 function Homepage(): JSX.Element {
   return (
     <Box p={1}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <NavBar>
         <h1>Russian Vocabulary Flashcards</h1>
         <Navigation />
-      </div>
+      </NavBar>
       <Outlet />
     </Box>
   );
