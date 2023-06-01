@@ -1,15 +1,20 @@
 import { Link } from "@mui/material";
 import { getEnglishTranslationDetails } from "api/english-translations";
 import useFetch from "hooks/useFetch";
+import { useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { EnglishTranslation } from "types/words";
 
 function EnglishTranslation(): JSX.Element {
   const { id } = useParams();
 
-  const { loading, error, data } = useFetch<EnglishTranslation>(getEnglishTranslationDetails, [id], {
-    triggerOnMount: true,
-  });
+  const { loading, error, data, trigger } = useFetch<EnglishTranslation>(getEnglishTranslationDetails, [id]);
+
+  useEffect(() => {
+    if (id) {
+      trigger(id);
+    }
+  }, [id]);
 
   if (loading) {
     // TODO
