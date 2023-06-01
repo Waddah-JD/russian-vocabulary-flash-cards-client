@@ -45,13 +45,7 @@ const ListContainerItem = styled("li")(() => {
 });
 
 function ListBox<T extends Option>(props: ListBoxProps<T>): JSX.Element {
-  if (props.isLoading) {
-    return (
-      <ListboxContainer style={{ width: props.width }}>
-        <li>Loading...</li>
-      </ListboxContainer>
-    );
-  }
+  if (props.isLoading) return <></>;
 
   if (props.values.length === 0) {
     return (
@@ -94,13 +88,15 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   const [options, setOptions] = useState<T[]>([]);
 
   async function handleSearch(): Promise<void> {
-    setIsLoading(true);
     const results = await props.searchFunction(searchTerm);
     setOptions(results);
-    setIsLoading(false);
   }
 
   useEffect(() => {
+    if (searchTerm) {
+      setIsLoading(true);
+    }
+
     if (throttledCall) {
       clearTimeout(throttledCall);
     }
@@ -108,6 +104,7 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
     throttledCall = setTimeout(() => {
       if (searchTerm) {
         handleSearch();
+        setIsLoading(false);
       }
     }, THROTTLE_RATE);
 
