@@ -1,9 +1,13 @@
 import { getPracticeWords } from "api/user-words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
-import NextOnlyPager from "components/Pagers/NextOnlyPager";
 import PracticeWordDetails from "components/Word/PracticeWord";
 import useFetch from "hooks/useFetch";
-import { PracticeWord } from "types/words";
+import { useState } from "react";
+import { PracticeWord, Word } from "types/words";
+
+type Props = {
+  items: Word[] | null;
+};
 
 function Practice(): JSX.Element {
   // TODO add a selector for batch number
@@ -22,8 +26,28 @@ function Practice(): JSX.Element {
   return (
     <ProtectedRouteLayout>
       <h2>Practice</h2>
-      <NextOnlyPager items={data?.map((it) => it.word)} itemView={PracticeWordDetails} />
+      <NextOnlyPager items={data?.map((it) => it.word) || []} />
     </ProtectedRouteLayout>
+  );
+}
+
+function NextOnlyPager(props: Props): JSX.Element {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  function moveToNextPage(): void {
+    setCurrentPage((it) => it + 1);
+  }
+
+  if (!props.items || props.items.length === 0) return <div>NO RESULTS</div>; // TODO
+
+  return (
+    <div>
+      {currentPage < props.items.length ? (
+        <PracticeWordDetails details={props.items[currentPage]} moveToNextPage={moveToNextPage} />
+      ) : (
+        <div>No more results</div> //TODO
+      )}
+    </div>
   );
 }
 
