@@ -8,6 +8,7 @@ type ReturnType<T> = {
   done: boolean;
   trigger: () => Promise<void>;
 };
+
 type Options = {
   triggerOnMount?: boolean;
   deps?: any[];
@@ -44,12 +45,6 @@ function useFetch<T>(fn: (...args: any[]) => Promise<T>, options?: Options): Ret
       trigger();
     }
   }, [...(options?.deps || [])]);
-
-  useEffect(() => {
-    if (triggerOnMount) {
-      trigger();
-    }
-  }, []);
 
   return { data, loading, error, done, trigger };
 }
