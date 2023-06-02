@@ -3,16 +3,36 @@ import { learnWords } from "api/words";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
 import LearnWord from "components/Word/LearnWord";
 import useFetch from "hooks/useFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Word } from "types/words";
 
 type PrevNextPagerProps = {
   items: Word[] | null;
+  notesMap: Record<Word["id"], string>;
+  setNote: (id: Word["id"], notes: string) => void;
 };
 
 function Learn(): JSX.Element {
+  const [notesMap, setNotesMap] = useState<Record<Word["id"], string>>({});
   // TODO add a selector for batch number
-  const { data: words, error, loading } = useFetch<Word[]>(() => learnWords(10), { triggerOnMount: true });
+  const { data, error, loading } = useFetch<Word[]>(() => learnWords(10), { triggerOnMount: true });
+
+  useEffect(() => {
+    setNotesMap(() => {
+      const hashMap: Record<Word["id"], string> = {};
+      if (!data) return hashMap;
+      for (const item of data) {
+        hashMap[item.id] = "";
+      }
+      return hashMap;
+    });
+  }, [data]);
+
+  function setNote(id: Word["id"], note: string): void {
+    setNotesMap((prev) => {
+      return { ...prev, [id]: note };
+    });
+  }
 
   if (loading) {
     // TODO
@@ -28,7 +48,7 @@ function Learn(): JSX.Element {
     <ProtectedRouteLayout>
       <h2>Learn</h2>
 
-      <PrevNextPager items={words} />
+      <PrevNextPager items={data} notesMap={notesMap} setNote={setNote} />
     </ProtectedRouteLayout>
   );
 }
@@ -45,9 +65,13 @@ function PrevNextPager(props: PrevNextPagerProps): JSX.Element {
 
   if (!props.items || props.items.length === 0) return <div>NO RESULTS</div>; // TODO
 
+  const wordDetails = props.items[currentPage];
+  const wordId = wordDetails.id;
+  const wordNote = props.notesMap[wordId] || "";
+
   return (
     <div>
-      <LearnWord details={props.items[currentPage]} />
+      <LearnWord details={wordDetails} note={wordNote} setNote={props.setNote} />
 
       <PrevNextPagerControllerContainer>
         <Button size="small" variant="outlined" disabled={currentPage === 0} onClick={moveToPreviousPage}>

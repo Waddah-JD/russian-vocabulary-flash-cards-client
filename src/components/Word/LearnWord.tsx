@@ -1,18 +1,21 @@
 import { Button, styled, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
 import useFetch from "hooks/useFetch";
-import { useEffect } from "react";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { Word } from "types/words";
 
 import WordDetails from "./Word";
 
 type Props = {
   details: Word;
+  note: string;
+  setNote: (id: Word["id"], notes: string) => void;
 };
 
 type AddToUserCollectionFormProps = {
   id: Word["id"];
+  note: Props["note"];
+  setNote: Props["setNote"];
 };
 
 const AddToUserCollectionFormContainer = styled("div")(({ theme }) => {
@@ -34,18 +37,12 @@ const AddToUserCollectionFormTextField = styled(TextField)(() => {
 });
 
 function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
-  const [notes, setNotes] = useState<string>();
-
-  useEffect(() => {
-    setNotes(undefined);
-  }, [props.id]);
-
-  const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, notes), {
+  const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, props.note), {
     deps: [props.id],
   });
 
   function handleSetNote(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-    setNotes(e.target.value);
+    props.setNote(props.id, e.target.value);
   }
 
   function handleAddToCollectionSubmit(e: FormEvent): void {
@@ -65,7 +62,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
     <p>Added Successfully!</p>
   ) : (
     <AddToUserCollectionFormContainer>
-      <AddToUserCollectionFormTextField multiline label="Notes" value={notes} onChange={handleSetNote} />
+      <AddToUserCollectionFormTextField multiline label="Notes" value={props.note} onChange={handleSetNote} />
       <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
         Add To Collection
       </Button>
@@ -77,7 +74,7 @@ function LearnWord(props: Props): JSX.Element {
   return (
     <>
       <WordDetails details={props.details} />
-      <AddToUserCollectionForm id={props.details.id} />
+      <AddToUserCollectionForm id={props.details.id} note={props.note} setNote={props.setNote} />
     </>
   );
 }
