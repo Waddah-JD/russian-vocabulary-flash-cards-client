@@ -11,19 +11,23 @@ const Menu = styled(Grid)(() => {
   };
 });
 
-const Title = styled("h1")(() => {
-  return { textAlign: "center" };
+const Title = styled("h1")(({ theme }) => {
+  return {
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+    },
+  };
 });
 
 function PageContainer(): JSX.Element {
   return (
     <Box p={1}>
       <Menu container>
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={12} md={6}>
           <Title>Russian Vocabulary Flashcards</Title>
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={12} md={6}>
           <Navigation />
         </Grid>
       </Menu>

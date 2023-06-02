@@ -15,12 +15,15 @@ type AddToUserCollectionFormProps = {
   id: Word["id"];
 };
 
-const AddToUserCollectionFormContainer = styled("div")(() => {
+const AddToUserCollectionFormContainer = styled("div")(({ theme }) => {
   return {
     display: "flex",
-    flexDirection: "row",
     gap: 10,
     marginBlock: 10,
+    flexDirection: "row",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
   };
 });
 
@@ -61,7 +64,7 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
   return done ? (
     <p>Added Successfully!</p>
   ) : (
-    <AddToUserCollectionFormContainer sx={{ flexDirection: { xs: "column", sm: "row" } }}>
+    <AddToUserCollectionFormContainer>
       <AddToUserCollectionFormTextField multiline label="Notes" value={notes} onChange={handleSetNote} />
       <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
         Add To Collection

@@ -5,11 +5,16 @@ import { AuthContext } from "contexts/Auth";
 import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-const NavBar = styled(Grid)(() => {
+const NavBar = styled(Grid)(({ theme }) => {
   return {
     display: "flex",
-    gap: 10,
+    gap: "10px",
     alignItems: "center",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+      marginBlockStart: "10px",
+    },
   };
 });
 
@@ -29,17 +34,12 @@ function Navigation(): JSX.Element {
 
   return (
     <Grid container>
-      <WordSearchContainer item xs={12} sm={6} sx={{}}>
+      <WordSearchContainer item xs={12} sm={6}>
         <WordSearch />
       </WordSearchContainer>
 
       {userIsAuthenticated ? (
-        <NavBar
-          item
-          xs={12}
-          sm={6}
-          sx={{ justifyContent: { xs: "center", sm: "flex-end" }, marginBlockStart: { xs: "10px", sm: "unset" } }}
-        >
+        <NavBar item xs={12} sm={6}>
           <Link component={RouterLink} to="/learn" underline="none">
             Learn
           </Link>
@@ -51,12 +51,7 @@ function Navigation(): JSX.Element {
           </Button>
         </NavBar>
       ) : (
-        <NavBar
-          item
-          xs={12}
-          sm={6}
-          sx={{ justifyContent: { xs: "center", sm: "flex-end" }, marginBlockStart: { xs: "10px", sm: "unset" } }}
-        >
+        <NavBar item xs={12} sm={6}>
           <Link component={RouterLink} to="/sign-in" underline="none">
             Sign In
           </Link>
