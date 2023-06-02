@@ -23,7 +23,7 @@ function Learn(): JSX.Element {
     <ProtectedRouteLayout>
       <h2>Learn</h2>
 
-      <PrevNextPager data={words} pageView={LearnWord} />
+      <PrevNextPager items={words} itemView={LearnWord} />
     </ProtectedRouteLayout>
   );
 }

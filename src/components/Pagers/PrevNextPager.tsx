@@ -2,9 +2,9 @@ import { Button, styled } from "@mui/material";
 import { useState } from "react";
 
 type Props<T> = {
-  data: T[] | null;
+  items: T[] | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pageView: (props: any) => JSX.Element;
+  itemView: (props: any) => JSX.Element;
 };
 
 type PrevNextPagerControllerProps = {
@@ -16,7 +16,7 @@ type PrevNextPagerControllerProps = {
 
 function PrevNextPager<T>(props: Props<T>): JSX.Element {
   const [currentPage, setCurrentPage] = useState(0);
-  const PageView = props.pageView;
+  const ItemView = props.itemView;
 
   function moveToPreviousPage(): void {
     setCurrentPage((it) => it - 1);
@@ -25,15 +25,15 @@ function PrevNextPager<T>(props: Props<T>): JSX.Element {
     setCurrentPage((it) => it + 1);
   }
 
-  if (!props.data || props.data.length === 0) return <div>NO RESULTS</div>; // TODO
+  if (!props.items || props.items.length === 0) return <div>NO RESULTS</div>; // TODO
 
   return (
     <div>
-      <PageView details={props.data[currentPage]} />
+      <ItemView details={props.items[currentPage]} />
       <PrevNextPagerController
         moveToPreviousPageIsDisabled={currentPage === 0}
         moveToPreviousPage={moveToPreviousPage}
-        moveToNextPageIsDisabled={currentPage === props.data.length - 1}
+        moveToNextPageIsDisabled={currentPage === props.items.length - 1}
         moveToNextPage={moveToNextPage}
       />
     </div>

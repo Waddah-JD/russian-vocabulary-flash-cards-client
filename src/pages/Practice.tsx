@@ -22,7 +22,7 @@ function Practice(): JSX.Element {
   return (
     <ProtectedRouteLayout>
       <h2>Practice</h2>
-      <NextOnlyPager data={data?.map((it) => it.word)} pageView={PracticeWordDetails} />
+      <NextOnlyPager items={data?.map((it) => it.word)} itemView={PracticeWordDetails} />
     </ProtectedRouteLayout>
   );
 }
