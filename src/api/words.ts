@@ -1,6 +1,6 @@
 import { Word } from "types/words";
 
-import axios from "./axios";
+import axios from "../axios";
 
 const path = `/v1/words`;
 
