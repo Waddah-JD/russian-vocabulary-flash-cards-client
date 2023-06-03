@@ -1,4 +1,5 @@
 import { getWordDetails } from "api/words";
+import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import WordDetails from "components/Word/Word";
 import useFetch from "hooks/useFetch";
 import { useParams } from "react-router-dom";
@@ -14,17 +15,11 @@ function WordPage(): JSX.Element {
     triggerOnMount: true,
   });
 
-  if (loading) {
-    // TODO
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    // TODO
-    return <p>Something went wrong!</p>;
-  }
-
-  return data ? <WordDetails details={data} /> : <div>No results</div>;
+  return (
+    <FetchedDataContainer loading={loading} error={error}>
+      {data ? <WordDetails details={data} /> : <div>No results</div>}
+    </FetchedDataContainer>
+  );
 }
 
 export default WordPage;

@@ -1,5 +1,6 @@
 import { Button, styled } from "@mui/material";
 import { submitPracticeWordResult } from "api/user-words";
+import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import useFetch from "hooks/useFetch";
 import { PracticeWord, Word } from "types/words";
 
@@ -50,23 +51,17 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
     props.moveToNextPage();
   }
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Something went wrong!</p>;
-  }
-
   return (
-    <PracticeResultFormContainer>
-      <Button variant="outlined" size="small" type="button" onClick={submitFailedPractice}>
-        Fail
-      </Button>
-      <Button variant="outlined" size="small" type="button" onClick={submitSuccessPractice}>
-        Success
-      </Button>
-    </PracticeResultFormContainer>
+    <FetchedDataContainer loading={loading} error={error}>
+      <PracticeResultFormContainer>
+        <Button variant="outlined" size="small" type="button" onClick={submitFailedPractice}>
+          Fail
+        </Button>
+        <Button variant="outlined" size="small" type="button" onClick={submitSuccessPractice}>
+          Success
+        </Button>
+      </PracticeResultFormContainer>
+    </FetchedDataContainer>
   );
 }
 

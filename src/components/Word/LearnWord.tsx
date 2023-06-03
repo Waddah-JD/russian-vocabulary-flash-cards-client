@@ -1,5 +1,6 @@
 import { Button, styled, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
+import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import useFetch from "hooks/useFetch";
 import { FormEvent } from "react";
 import { Word } from "types/words";
@@ -50,23 +51,19 @@ function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Eleme
     trigger();
   }
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Something went wrong!</p>;
-  }
-
-  return done ? (
-    <p>Added Successfully!</p>
-  ) : (
-    <AddToUserCollectionFormContainer>
-      <AddToUserCollectionFormTextField multiline label="Notes" value={props.note} onChange={handleSetNote} />
-      <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
-        Add To Collection
-      </Button>
-    </AddToUserCollectionFormContainer>
+  return (
+    <FetchedDataContainer loading={loading} error={error}>
+      {done ? (
+        <p>Added Successfully!</p>
+      ) : (
+        <AddToUserCollectionFormContainer>
+          <AddToUserCollectionFormTextField multiline label="Notes" value={props.note} onChange={handleSetNote} />
+          <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
+            Add To Collection
+          </Button>
+        </AddToUserCollectionFormContainer>
+      )}
+    </FetchedDataContainer>
   );
 }
 

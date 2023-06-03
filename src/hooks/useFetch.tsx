@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 type ReturnType<T> = {
   data: T | null;
-  loading: boolean | null;
+  loading: boolean;
   error: unknown;
   done: boolean;
   trigger: () => Promise<void>;
@@ -19,7 +19,7 @@ function useFetch<T>(fn: (...args: any[]) => Promise<T>, options?: Options): Ret
   const triggerOnMount = options?.triggerOnMount || false;
 
   const [data, setData] = useState<ReturnType<T>["data"]>(null);
-  const [loading, setLoading] = useState<ReturnType<T>["loading"]>(null);
+  const [loading, setLoading] = useState<ReturnType<T>["loading"]>(false);
   const [error, setError] = useState<ReturnType<T>["error"]>();
   const [done, setDone] = useState<ReturnType<T>["done"]>(false);
 

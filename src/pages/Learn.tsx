@@ -1,5 +1,6 @@
 import { Button, styled } from "@mui/material";
 import { learnWords } from "api/words";
+import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
 import LearnWord from "components/Word/LearnWord";
 import useFetch from "hooks/useFetch";
@@ -34,22 +35,14 @@ function Learn(): JSX.Element {
     });
   }
 
-  if (loading) {
-    // TODO
-    return <p>Loading..</p>;
-  }
-
-  if (error) {
-    // TODO
-    return <p>ERROR!</p>;
-  }
-
   return (
-    <ProtectedRouteLayout>
-      <h2>Learn</h2>
+    <FetchedDataContainer loading={loading} error={error}>
+      <ProtectedRouteLayout>
+        <h2>Learn</h2>
 
-      <PrevNextPager items={data} notesMap={notesMap} setNote={setNote} />
-    </ProtectedRouteLayout>
+        <PrevNextPager items={data} notesMap={notesMap} setNote={setNote} />
+      </ProtectedRouteLayout>
+    </FetchedDataContainer>
   );
 }
 
