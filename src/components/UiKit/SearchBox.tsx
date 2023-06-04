@@ -15,7 +15,7 @@ type Props<T> = {
 };
 
 type ListBoxProps<T> = {
-  values: T[];
+  values: T[] | null;
   isLoading: boolean;
   width?: number;
   closeList?: () => void;
@@ -45,7 +45,7 @@ const ListContainerItem = styled("li")(() => {
 });
 
 function ListBox<T extends Option>(props: ListBoxProps<T>): JSX.Element {
-  if (props.isLoading) return <></>;
+  if (props.isLoading || !props.values) return <></>;
 
   if (props.values.length === 0) {
     return (
@@ -85,11 +85,12 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [options, setOptions] = useState<T[]>([]);
+  const [options, setOptions] = useState<T[] | null>(null);
 
   async function handleSearch(): Promise<void> {
     const results = await props.searchFunction(searchTerm);
     setOptions(results);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -104,7 +105,6 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
     throttledCall = setTimeout(() => {
       if (searchTerm) {
         handleSearch();
-        setIsLoading(false);
       }
     }, THROTTLE_RATE);
 
@@ -113,7 +113,7 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
 
   useEffect(() => {
     if (!searchTerm) {
-      setOptions([]);
+      setOptions(null);
     }
   }, [searchTerm]);
 
