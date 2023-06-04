@@ -1,4 +1,4 @@
-import { getIdToken, signUp } from "api/auth";
+import { signUp } from "api/auth";
 import { createUser } from "api/users";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
@@ -16,11 +16,11 @@ function SignUp(): JSX.Element {
     setPassword(e.target.value);
   }
   async function handleSignUp(): Promise<void> {
-    await signUp(email, password);
-    const token = await getIdToken();
-    if (!token) throw new Error("ID token is missing"); // this will never be triggered, hopefully
+    const userCredentials = await signUp(email, password);
+    const token = await userCredentials.user.getIdToken();
     await createUser(token);
   }
+
   return (
     <UnauthenticatedOnlyRouteLayout>
       <h2>Sign Up</h2>
