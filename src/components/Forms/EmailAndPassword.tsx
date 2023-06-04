@@ -20,19 +20,13 @@ const Form = styled("form")(({ theme }) => {
     border: `1px solid ${theme.palette.grey["A400"]}`,
     borderRadius: "8px",
     padding: "16px",
+    gap: "16px",
   };
 });
 
 const FormField = styled(TextField)(() => {
   return {
     width: "100%",
-    marginBlock: "8px",
-  };
-});
-
-const SubmitButton = styled(Button)(() => {
-  return {
-    marginBlock: "8px",
   };
 });
 
@@ -63,10 +57,10 @@ function EmailAndPassword(props: Props): JSX.Element {
         value={password}
         onChange={handlePasswordChange}
       />
-      <SubmitButton type="submit" variant="contained" size="small">
+      <Button type="submit" variant="contained" size="small">
         {/* TODO add disable on validation / submitting .. etc */}
         {submitButtonLabel || "submit"}
-      </SubmitButton>
+      </Button>
     </Form>
   );
 }
