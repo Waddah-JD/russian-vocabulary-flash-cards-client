@@ -56,12 +56,7 @@ function PrevNextPager(props: PrevNextPagerProps): JSX.Element {
     setCurrentPage((it) => it + 1);
   }
 
-  if (!props.items || props.items.length === 0)
-    return (
-      <Alert severity="warning">
-        <p>No results were found!</p>
-      </Alert>
-    );
+  if (!props.items || props.items.length === 0) return <Alert severity="warning">No results were found!</Alert>;
 
   const wordDetails = props.items[currentPage];
   const wordId = wordDetails.id;
