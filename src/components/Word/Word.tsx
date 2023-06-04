@@ -1,4 +1,13 @@
-import { Link, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+  Link,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer as MuiTableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Noun, Verb, Word, WordType } from "types/words";
 import { oneOfTheArgsIsDefined } from "utils/general";
@@ -285,6 +294,12 @@ const TranslationsContainer = styled("div")(() => {
     display: "flex",
     flexWrap: "wrap",
     gap: 5,
+  };
+});
+
+const TableContainer = styled(MuiTableContainer)(() => {
+  return {
+    width: "max-content",
   };
 });
 
