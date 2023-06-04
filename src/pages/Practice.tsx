@@ -4,10 +4,10 @@ import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
 import PracticeWordDetails from "components/Word/PracticeWord";
 import useFetch from "hooks/useFetch";
 import { useState } from "react";
-import { PracticeWord, Word } from "types/words";
+import { PracticeWord } from "types/words";
 
 type Props = {
-  items: Word[] | null;
+  items: PracticeWord[] | null;
 };
 
 function Practice(): JSX.Element {
@@ -18,7 +18,7 @@ function Practice(): JSX.Element {
     <FetchedDataContainer loading={loading} error={error}>
       <ProtectedRouteLayout>
         <h2>Practice</h2>
-        <NextOnlyPager items={data?.map((it) => it.word) || []} />
+        <NextOnlyPager items={data?.map(({ word, notes }) => ({ word, notes })) || []} />
       </ProtectedRouteLayout>
     </FetchedDataContainer>
   );
@@ -36,7 +36,7 @@ function NextOnlyPager(props: Props): JSX.Element {
   return (
     <div>
       {currentPage < props.items.length ? (
-        <PracticeWordDetails details={props.items[currentPage]} moveToNextPage={moveToNextPage} />
+        <PracticeWordDetails item={props.items[currentPage]} moveToNextPage={moveToNextPage} />
       ) : (
         <div>No more results</div> //TODO
       )}

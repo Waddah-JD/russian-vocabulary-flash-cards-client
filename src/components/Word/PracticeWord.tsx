@@ -7,7 +7,7 @@ import { PracticeWord, Word } from "types/words";
 import WordDetails from "./Word";
 
 type Props = {
-  details: Word;
+  item: PracticeWord;
   moveToNextPage: () => void;
 };
 
@@ -68,8 +68,8 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
 function PracticeWord(props: Props): JSX.Element {
   return (
     <>
-      <WordDetails details={props.details} />
-      <SubmitPracticeResultForm id={props.details.id} moveToNextPage={props.moveToNextPage} />
+      <WordDetails details={props.item.word} userNotes={props.item.notes} />
+      <SubmitPracticeResultForm id={props.item.word.id} moveToNextPage={props.moveToNextPage} />
     </>
   );
 }

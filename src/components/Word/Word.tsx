@@ -5,6 +5,7 @@ import { oneOfTheArgsIsDefined } from "utils/general";
 
 type Props = {
   details: Word;
+  userNotes?: string;
 };
 
 function NounDetails(props: Noun): JSX.Element {
@@ -245,14 +246,6 @@ function VerbDetails(props: Verb): JSX.Element {
   );
 }
 
-const TranslationsContainer = styled("div")(() => {
-  return {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 5,
-  };
-});
-
 function WordDetails(props: Props): JSX.Element {
   const { id, word, pronunciation, accented, type, noun, verb, englishTranslations } = props.details;
 
@@ -266,6 +259,8 @@ function WordDetails(props: Props): JSX.Element {
       <p>Accented: {noun?.declensionNominativeSingular || verb?.infinitive || accented}</p>
 
       <p>Type: {type}</p>
+
+      {props.userNotes && <p>Notes: {props.userNotes}</p>}
 
       {englishTranslations.length > 0 && (
         <TranslationsContainer>
@@ -284,5 +279,13 @@ function WordDetails(props: Props): JSX.Element {
     </div>
   );
 }
+
+const TranslationsContainer = styled("div")(() => {
+  return {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 5,
+  };
+});
 
 export default WordDetails;
