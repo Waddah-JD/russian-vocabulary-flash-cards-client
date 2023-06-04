@@ -12,37 +12,9 @@ type Props = {
   errorHandlerFn: (err: unknown) => { title: string; description: string };
 };
 
-const Form = styled("form")(({ theme }) => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: "400px",
-    margin: "0 auto",
-    alignItems: "flex-end",
-    border: `1px solid ${theme.palette.grey["A400"]}`,
-    borderRadius: "8px",
-    padding: "16px",
-    gap: "16px",
-  };
-});
-
-const FormField = styled(TextField)(() => {
-  return {
-    width: "100%",
-  };
-});
-
-function validateEmail(email: string): boolean {
-  // return email.length === 0 || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
-  return email.length === 0;
-}
-
-function validatePassword(password: string): boolean {
-  return password.length === 0;
-}
-
 function EmailAndPassword(props: Props): JSX.Element {
   const [errorMessages, setErrorMessages] = useState<EmailAndPasswordFormErrorMessages>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { email, handleEmailChange, password, handlePasswordChange, submitButtonLabel, handleSubmitForm } = props;
   const emailIsInvalid = validateEmail(email);
   const passwordIsInvalid = validatePassword(password);
@@ -50,8 +22,8 @@ function EmailAndPassword(props: Props): JSX.Element {
   const [submitIsDisabled, setSubmitIsDisabled] = useState(emailIsInvalid || passwordIsInvalid);
 
   useEffect(() => {
-    setSubmitIsDisabled(emailIsInvalid || passwordIsInvalid);
-  }, [email, password]);
+    setSubmitIsDisabled(isSubmitting || emailIsInvalid || passwordIsInvalid);
+  }, [isSubmitting, email, password]);
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
@@ -59,13 +31,13 @@ function EmailAndPassword(props: Props): JSX.Element {
     if (submitIsDisabled) return;
 
     try {
-      setSubmitIsDisabled(true);
+      setIsSubmitting(true);
       await handleSubmitForm();
     } catch (error) {
       const errorMessagesObj = props.errorHandlerFn(error);
       setErrorMessages(errorMessagesObj);
     } finally {
-      setSubmitIsDisabled(false);
+      setIsSubmitting(false);
     }
   }
 
@@ -89,7 +61,7 @@ function EmailAndPassword(props: Props): JSX.Element {
         onChange={handlePasswordChange}
       />
       <Button disabled={submitIsDisabled} type="submit" variant="contained" size="small">
-        {submitButtonLabel || "submit"}
+        {isSubmitting ? "Submitting.." : submitButtonLabel || "submit"}
       </Button>
     </Form>
   );
@@ -103,5 +75,33 @@ function ErrorAlert(props: EmailAndPasswordFormErrorMessages): JSX.Element {
     </Alert>
   );
 }
+
+function validateEmail(email: string): boolean {
+  return email.length === 0 || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
+}
+
+function validatePassword(password: string): boolean {
+  return password.length === 0;
+}
+
+const Form = styled("form")(({ theme }) => {
+  return {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "400px",
+    margin: "0 auto",
+    alignItems: "flex-end",
+    border: `1px solid ${theme.palette.grey["A400"]}`,
+    borderRadius: "8px",
+    padding: "16px",
+    gap: "16px",
+  };
+});
+
+const FormField = styled(TextField)(() => {
+  return {
+    width: "100%",
+  };
+});
 
 export default EmailAndPassword;
