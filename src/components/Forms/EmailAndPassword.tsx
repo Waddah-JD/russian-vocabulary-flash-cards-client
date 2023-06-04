@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, styled, TextField } from "@mui/material";
 import { FormEvent } from "react";
 
 type Props = {
@@ -10,6 +10,32 @@ type Props = {
   handleSubmitForm: () => void;
 };
 
+const Form = styled("form")(({ theme }) => {
+  return {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "400px",
+    margin: "0 auto",
+    alignItems: "flex-end",
+    border: `1px solid ${theme.palette.grey["A400"]}`,
+    borderRadius: "8px",
+    padding: "16px",
+  };
+});
+
+const FormField = styled(TextField)(() => {
+  return {
+    width: "100%",
+    marginBlock: "8px",
+  };
+});
+
+const SubmitButton = styled(Button)(() => {
+  return {
+    marginBlock: "8px",
+  };
+});
+
 function EmailAndPassword(props: Props): JSX.Element {
   const { email, handleEmailChange, password, handlePasswordChange, submitButtonLabel, handleSubmitForm } = props;
 
@@ -20,8 +46,8 @@ function EmailAndPassword(props: Props): JSX.Element {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
+    <Form onSubmit={handleSubmit}>
+      <FormField
         type="email"
         size="small"
         label="Email"
@@ -29,7 +55,7 @@ function EmailAndPassword(props: Props): JSX.Element {
         value={email}
         onChange={handleEmailChange}
       />
-      <TextField
+      <FormField
         type="password"
         size="small"
         label="Password"
@@ -37,11 +63,11 @@ function EmailAndPassword(props: Props): JSX.Element {
         value={password}
         onChange={handlePasswordChange}
       />
-      <Button type="submit" variant="contained" size="small">
+      <SubmitButton type="submit" variant="contained" size="small">
         {/* TODO add disable on validation / submitting .. etc */}
         {submitButtonLabel || "submit"}
-      </Button>
-    </form>
+      </SubmitButton>
+    </Form>
   );
 }
 
