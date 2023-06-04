@@ -18,7 +18,7 @@ function SignUp(): JSX.Element {
   async function handleSignUp(): Promise<void> {
     await signUp(email, password);
     const token = await getIdToken();
-    if (!token) throw new Error(); //TODO
+    if (!token) throw new Error("ID token is missing"); // this will never be triggered, hopefully
     await createUser(token);
   }
   return (
