@@ -1,5 +1,5 @@
 import { Button, styled, TextField } from "@mui/material";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 type Props = {
   email: string;
@@ -30,10 +30,28 @@ const FormField = styled(TextField)(() => {
   };
 });
 
+function validateEmail(email: string): boolean {
+  return email.length === 0 || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
+}
+
+function validatePassword(password: string): boolean {
+  return password.length === 0;
+}
+
 function EmailAndPassword(props: Props): JSX.Element {
   const { email, handleEmailChange, password, handlePasswordChange, submitButtonLabel, handleSubmitForm } = props;
+  const emailIsInvalid = validateEmail(email);
+  const passwordIsInvalid = validatePassword(password);
+
+  const [submitIsDisabled, setSubmitIsDisabled] = useState(emailIsInvalid || passwordIsInvalid);
+
+  useEffect(() => {
+    setSubmitIsDisabled(emailIsInvalid || passwordIsInvalid);
+  }, [email, password]);
 
   function handleSubmit(e: FormEvent): void {
+    if (submitIsDisabled) return;
+
     // TODO add validation: missing email and/or password ... etc
     e.preventDefault();
     handleSubmitForm();
@@ -57,8 +75,7 @@ function EmailAndPassword(props: Props): JSX.Element {
         value={password}
         onChange={handlePasswordChange}
       />
-      <Button type="submit" variant="contained" size="small">
-        {/* TODO add disable on validation / submitting .. etc */}
+      <Button disabled={submitIsDisabled} type="submit" variant="contained" size="small">
         {submitButtonLabel || "submit"}
       </Button>
     </Form>
