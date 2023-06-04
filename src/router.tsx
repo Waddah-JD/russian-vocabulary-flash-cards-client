@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from "
 
 import PageContainer from "./components/Layout/PageContainer";
 import EnglishTranslation from "./pages/EnglishTranslation";
+import Homepage from "./pages/Homepage";
 import Learn from "./pages/Learn";
 import Practice from "./pages/Practice";
 import SignIn from "./pages/SignIn";
@@ -10,7 +11,8 @@ import WordPage from "./pages/Word";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<PageContainer />}>
+    <Route element={<PageContainer />}>
+      <Route path="/" element={<Homepage />} />
       <Route path="/learn" element={<Learn />} />
       <Route path="/practice" element={<Practice />} />
       <Route path="/sign-in" element={<SignIn />} />

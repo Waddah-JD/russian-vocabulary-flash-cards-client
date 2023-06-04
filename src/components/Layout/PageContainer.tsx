@@ -31,6 +31,7 @@ function PageContainer(): JSX.Element {
           <Navigation />
         </Grid>
       </Menu>
+
       <Outlet />
     </Box>
   );
