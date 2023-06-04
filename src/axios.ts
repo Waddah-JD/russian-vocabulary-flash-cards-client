@@ -4,8 +4,6 @@ import { getIdToken } from "./api/auth";
 
 axios.defaults.baseURL = process.env.SERVER_API_ENDPOINT;
 
-// TODO remove logs
-
 axios.interceptors.request.use(async function (request) {
   const token = await getIdToken();
 

@@ -3,6 +3,7 @@ import { createUser } from "api/users";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import { useState } from "react";
+import { mapFirebaseErrorToErrorMessage } from "utils/firebase";
 
 function SignUp(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ function SignUp(): JSX.Element {
         handlePasswordChange={handleSetPassword}
         handleSubmitForm={handleSignUp}
         submitButtonLabel="Sign Up"
+        errorHandlerFn={mapFirebaseErrorToErrorMessage}
       />
     </UnauthenticatedOnlyRouteLayout>
   );

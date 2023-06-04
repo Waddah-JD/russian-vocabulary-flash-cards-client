@@ -1,5 +1,6 @@
-import { Button, styled, TextField } from "@mui/material";
+import { Alert, AlertTitle, Button, styled, TextField } from "@mui/material";
 import { FormEvent, useEffect, useState } from "react";
+import { EmailAndPasswordFormErrorMessages } from "types/auth";
 
 type Props = {
   email: string;
@@ -7,7 +8,8 @@ type Props = {
   password: string;
   handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   submitButtonLabel?: string;
-  handleSubmitForm: () => void;
+  handleSubmitForm: () => Promise<void>;
+  errorHandlerFn: (err: unknown) => { title: string; description: string };
 };
 
 const Form = styled("form")(({ theme }) => {
@@ -31,7 +33,8 @@ const FormField = styled(TextField)(() => {
 });
 
 function validateEmail(email: string): boolean {
-  return email.length === 0 || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
+  // return email.length === 0 || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
+  return email.length === 0;
 }
 
 function validatePassword(password: string): boolean {
@@ -39,6 +42,7 @@ function validatePassword(password: string): boolean {
 }
 
 function EmailAndPassword(props: Props): JSX.Element {
+  const [errorMessages, setErrorMessages] = useState<EmailAndPasswordFormErrorMessages>();
   const { email, handleEmailChange, password, handlePasswordChange, submitButtonLabel, handleSubmitForm } = props;
   const emailIsInvalid = validateEmail(email);
   const passwordIsInvalid = validatePassword(password);
@@ -49,16 +53,25 @@ function EmailAndPassword(props: Props): JSX.Element {
     setSubmitIsDisabled(emailIsInvalid || passwordIsInvalid);
   }, [email, password]);
 
-  function handleSubmit(e: FormEvent): void {
+  async function handleSubmit(e: FormEvent): Promise<void> {
+    e.preventDefault();
+
     if (submitIsDisabled) return;
 
-    // TODO add validation: missing email and/or password ... etc
-    e.preventDefault();
-    handleSubmitForm();
+    try {
+      setSubmitIsDisabled(true);
+      await handleSubmitForm();
+    } catch (error) {
+      const errorMessagesObj = props.errorHandlerFn(error);
+      setErrorMessages(errorMessagesObj);
+    } finally {
+      setSubmitIsDisabled(false);
+    }
   }
 
   return (
     <Form onSubmit={handleSubmit}>
+      {errorMessages && <ErrorAlert {...errorMessages} />}
       <FormField
         type="email"
         size="small"
@@ -79,6 +92,15 @@ function EmailAndPassword(props: Props): JSX.Element {
         {submitButtonLabel || "submit"}
       </Button>
     </Form>
+  );
+}
+
+function ErrorAlert(props: EmailAndPasswordFormErrorMessages): JSX.Element {
+  return (
+    <Alert severity="error">
+      <AlertTitle>{props.title}</AlertTitle>
+      {props.description}
+    </Alert>
   );
 }
 

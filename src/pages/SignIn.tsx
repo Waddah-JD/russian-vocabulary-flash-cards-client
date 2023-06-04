@@ -2,6 +2,7 @@ import { signIn } from "api/auth";
 import EmailAndPassword from "components/Forms/EmailAndPassword";
 import UnauthenticatedOnlyRouteLayout from "components/Layout/UnauthenticatedOnlyRouteLayout";
 import { useState } from "react";
+import { mapFirebaseErrorToErrorMessage } from "utils/firebase";
 
 function SignIn(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -27,6 +28,7 @@ function SignIn(): JSX.Element {
         handlePasswordChange={handleSetPassword}
         handleSubmitForm={handleSignIn}
         submitButtonLabel="Sign In"
+        errorHandlerFn={mapFirebaseErrorToErrorMessage}
       />
     </UnauthenticatedOnlyRouteLayout>
   );

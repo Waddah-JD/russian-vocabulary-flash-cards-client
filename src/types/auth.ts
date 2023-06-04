@@ -5,3 +5,5 @@ export type AuthUser = {
   phoneNumber: string | null;
   photoURL: string | null;
 };
+
+export type EmailAndPasswordFormErrorMessages = { title: string; description: string };
