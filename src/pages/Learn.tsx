@@ -1,4 +1,4 @@
-import { Button, styled } from "@mui/material";
+import { Alert, Button, styled } from "@mui/material";
 import { learnWords } from "api/words";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
@@ -56,7 +56,12 @@ function PrevNextPager(props: PrevNextPagerProps): JSX.Element {
     setCurrentPage((it) => it + 1);
   }
 
-  if (!props.items || props.items.length === 0) return <div>NO RESULTS</div>; // TODO
+  if (!props.items || props.items.length === 0)
+    return (
+      <Alert severity="warning">
+        <p>No results were found!</p>
+      </Alert>
+    );
 
   const wordDetails = props.items[currentPage];
   const wordId = wordDetails.id;

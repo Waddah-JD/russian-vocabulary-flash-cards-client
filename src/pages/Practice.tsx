@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { getPracticeWords } from "api/user-words";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
@@ -35,7 +35,12 @@ function NextOnlyPager(props: Props): JSX.Element {
     setCurrentPage((it) => it + 1);
   }
 
-  if (!props.items || props.items.length === 0) return <div>NO RESULTS</div>; // TODO
+  if (!props.items || props.items.length === 0)
+    return (
+      <Alert severity="warning">
+        <p>No results were found!</p>
+      </Alert>
+    );
 
   return (
     <div>
