@@ -5,6 +5,7 @@ const theme = createTheme({
     fontFamily: ['"Roboto"', "sans-serif"].join(","),
   },
   components: {
+    MuiTable: { styleOverrides: { root: { marginBlock: "8px" } } },
     MuiTableCell: { styleOverrides: { root: { border: "1px solid black", textAlign: "center" } } },
   },
 });
