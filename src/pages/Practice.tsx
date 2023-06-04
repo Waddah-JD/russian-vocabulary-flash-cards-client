@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { getPracticeWords } from "api/user-words";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import ProtectedRouteLayout from "components/Layout/ProtectedRouteLayout";
@@ -8,17 +9,20 @@ import { PracticeWord } from "types/words";
 
 type Props = {
   items: PracticeWord[] | null;
+  fetchAnotherBatch: () => void;
 };
 
 function Practice(): JSX.Element {
   // TODO add a selector for batch number
-  const { data, error, loading } = useFetch<PracticeWord[]>(() => getPracticeWords(10), { triggerOnMount: true });
+  const { data, error, loading, trigger } = useFetch<PracticeWord[]>(() => getPracticeWords(10), {
+    triggerOnMount: true,
+  });
 
   return (
     <FetchedDataContainer loading={loading} error={error}>
       <ProtectedRouteLayout>
         <h2>Practice</h2>
-        <NextOnlyPager items={data?.map(({ word, notes }) => ({ word, notes })) || []} />
+        <NextOnlyPager items={data?.map(({ word, notes }) => ({ word, notes })) || []} fetchAnotherBatch={trigger} />
       </ProtectedRouteLayout>
     </FetchedDataContainer>
   );
@@ -38,7 +42,7 @@ function NextOnlyPager(props: Props): JSX.Element {
       {currentPage < props.items.length ? (
         <PracticeWordDetails item={props.items[currentPage]} moveToNextPage={moveToNextPage} />
       ) : (
-        <div>No more results</div> //TODO
+        <Button onClick={props.fetchAnotherBatch}>Practice More</Button>
       )}
     </div>
   );
