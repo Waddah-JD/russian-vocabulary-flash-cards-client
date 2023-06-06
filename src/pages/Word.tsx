@@ -1,14 +1,24 @@
+import { Alert } from "@mui/material";
 import { getWordDetails } from "api/words";
+import AddToUserCollectionForm from "components/Forms/AddWordToCollection";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import ErrorIndicator from "components/UiKit/ErrorIndicator";
 import WordDetails from "components/Word/Word";
+import { AuthContext } from "contexts/Auth";
 import useFetch from "hooks/useFetch";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EnglishTranslation as WordPage, Word } from "types/words";
 import { isApiError, isNumericString } from "utils/types";
 
+type AddWordToUserCollectionProps = {
+  id: Word["id"];
+};
+
 function WordPage(): JSX.Element {
   const { id } = useParams();
+
+  const { userIsAuthenticated } = useContext(AuthContext);
 
   // this won't be triggered since there is a redirect to homepage for such path
   if (!id) return <ErrorIndicator message="Missing Word ID param" />;
@@ -22,9 +32,26 @@ function WordPage(): JSX.Element {
 
   return (
     <FetchedDataContainer loading={loading} error={error} errorOptions={{ errorMapperFn: mapErrors }}>
-      {data ? <WordDetails details={data} /> : <div>No results</div>}
+      {data ? (
+        <>
+          <WordDetails details={data} />
+          {userIsAuthenticated && <AddWordToUserCollection id={data.id} />}
+        </>
+      ) : (
+        <Alert severity="warning">No results were found!</Alert>
+      )}
     </FetchedDataContainer>
   );
+}
+
+function AddWordToUserCollection(props: AddWordToUserCollectionProps): JSX.Element {
+  const [note, setNote] = useState<string>("");
+
+  function handleSetNote(_: Word["id"], notes: string): void {
+    setNote(notes);
+  }
+
+  return <AddToUserCollectionForm id={props.id} note={note} setNote={handleSetNote} />;
 }
 
 function mapErrors(error: unknown): string | null {

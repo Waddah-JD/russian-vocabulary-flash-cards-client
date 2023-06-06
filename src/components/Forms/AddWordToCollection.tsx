@@ -5,7 +5,7 @@ import useFetch from "hooks/useFetch";
 import { FormEvent } from "react";
 import { Word } from "types/words";
 
-type AddToUserCollectionFormProps = {
+type Props = {
   id: Word["id"];
   note: string;
   setNote: (id: Word["id"], notes: string) => void;
@@ -29,7 +29,7 @@ const AddToUserCollectionFormTextField = styled(TextField)(() => {
   };
 });
 
-function AddToUserCollectionForm(props: AddToUserCollectionFormProps): JSX.Element {
+function AddToUserCollectionForm(props: Props): JSX.Element {
   const { loading, error, done, trigger } = useFetch<void>(() => addWordToUserCollection(props.id, props.note), {
     deps: [props.id],
   });
