@@ -1,7 +1,9 @@
 import { Button, styled } from "@mui/material";
 import { submitPracticeWordResult } from "api/user-words";
+import AddToUserCollectionForm from "components/Forms/AddWordToCollection";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import useFetch from "hooks/useFetch";
+import { useEffect, useState } from "react";
 import { PracticeWord, Word } from "types/words";
 
 import WordDetails from "./Word";
@@ -14,6 +16,11 @@ type Props = {
 type SubmitPracticeResultFormProps = {
   id: Word["id"];
   moveToNextPage: Props["moveToNextPage"];
+};
+
+type AddOrUpdateNoteProps = {
+  id: Word["id"];
+  note?: string;
 };
 
 const PracticeResultFormContainer = styled("div")(() => {
@@ -68,9 +75,31 @@ function SubmitPracticeResultForm(props: SubmitPracticeResultFormProps): JSX.Ele
 function PracticeWord(props: Props): JSX.Element {
   return (
     <>
-      <WordDetails details={props.item.word} userNotes={props.item.notes} />
+      <WordDetails details={props.item.word} />
+      <AddOrUpdateNote id={props.item.word.id} note={props.item.notes} />
       <SubmitPracticeResultForm id={props.item.word.id} moveToNextPage={props.moveToNextPage} />
     </>
+  );
+}
+
+function AddOrUpdateNote(props: AddOrUpdateNoteProps): JSX.Element {
+  const [note, setNote] = useState<string>(props.note || "");
+
+  useEffect(() => {
+    setNote(props.note || "");
+  }, [props.note]);
+
+  function handleSetNote(_: Word["id"], notes: string): void {
+    setNote(notes);
+  }
+
+  return (
+    <AddToUserCollectionForm
+      id={props.id}
+      note={note}
+      setNote={handleSetNote}
+      actionButtonLabel={props.note && "Update Note"}
+    />
   );
 }
 

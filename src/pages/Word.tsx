@@ -51,7 +51,7 @@ function WordPage(): JSX.Element {
 }
 
 function AddWordToUserCollection(props: AddWordToUserCollectionProps): JSX.Element {
-  const [note, setNote] = useState<string>("");
+  const [note, setNote] = useState<string>(props.note || "");
 
   useEffect(() => {
     setNote(props.note);

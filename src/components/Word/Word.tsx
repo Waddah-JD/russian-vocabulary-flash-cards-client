@@ -14,7 +14,6 @@ import { oneOfTheArgsIsDefined } from "utils/general";
 
 type Props = {
   details: Word;
-  userNotes?: string;
 };
 
 function NounDetails(props: Noun): JSX.Element {
@@ -268,8 +267,6 @@ function WordDetails(props: Props): JSX.Element {
       <p>Accented: {noun?.declensionNominativeSingular || verb?.infinitive || accented}</p>
 
       <p>Type: {type}</p>
-
-      {props.userNotes && <p>Notes: {props.userNotes}</p>}
 
       {englishTranslations.length > 0 && (
         <TranslationsContainer>
