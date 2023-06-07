@@ -6,13 +6,14 @@ import ErrorIndicator from "components/UiKit/ErrorIndicator";
 import WordDetails from "components/Word/Word";
 import { AuthContext } from "contexts/Auth";
 import useFetch from "hooks/useFetch";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { EnglishTranslation as WordPage, Word } from "types/words";
+import { EnglishTranslation as WordPage, Word, WordInCollection } from "types/words";
 import { isApiError, isNumericString } from "utils/types";
 
 type AddWordToUserCollectionProps = {
   id: Word["id"];
+  note: string;
 };
 
 function WordPage(): JSX.Element {
@@ -25,7 +26,7 @@ function WordPage(): JSX.Element {
 
   if (!isNumericString(id)) return <ErrorIndicator message={`The value "${id}" is not a valid Word ID`} />;
 
-  const { loading, error, data } = useFetch<Word>((): Promise<Word> => getWordDetails(id), {
+  const { loading, error, data } = useFetch<Word | WordInCollection>((): Promise<Word> => getWordDetails(id), {
     deps: [id],
     triggerOnMount: true,
   });
@@ -35,7 +36,12 @@ function WordPage(): JSX.Element {
       {data ? (
         <>
           <WordDetails details={data} />
-          {userIsAuthenticated && <AddWordToUserCollection id={data.id} />}
+          {userIsAuthenticated && (
+            <AddWordToUserCollection
+              id={data.id}
+              note={data && "collectionEntry" in data ? data.collectionEntry?.notes : ""}
+            />
+          )}
         </>
       ) : (
         <Alert severity="warning">No results were found!</Alert>
@@ -47,11 +53,22 @@ function WordPage(): JSX.Element {
 function AddWordToUserCollection(props: AddWordToUserCollectionProps): JSX.Element {
   const [note, setNote] = useState<string>("");
 
+  useEffect(() => {
+    setNote(props.note);
+  }, [props.note]);
+
   function handleSetNote(_: Word["id"], notes: string): void {
     setNote(notes);
   }
 
-  return <AddToUserCollectionForm id={props.id} note={note} setNote={handleSetNote} />;
+  return (
+    <AddToUserCollectionForm
+      id={props.id}
+      note={note}
+      setNote={handleSetNote}
+      actionButtonLabel={props.note && "Update Note"}
+    />
+  );
 }
 
 function mapErrors(error: unknown): string | null {

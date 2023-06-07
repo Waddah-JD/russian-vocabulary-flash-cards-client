@@ -80,3 +80,12 @@ export type PracticeWord = {
   word: Word;
   notes?: string;
 };
+
+type CollectionEntry = {
+  id: number;
+  notes: string;
+  failedPracticeCount: number;
+  successfulPracticeCount: number;
+};
+
+export type WordInCollection = Word & { collectionEntry: CollectionEntry };

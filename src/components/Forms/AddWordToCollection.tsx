@@ -1,4 +1,4 @@
-import { Button, styled, TextField } from "@mui/material";
+import { Alert, Button, styled, TextField } from "@mui/material";
 import { addWordToUserCollection } from "api/user-words";
 import FetchedDataContainer from "components/Layout/FetchedDataContainer";
 import useFetch from "hooks/useFetch";
@@ -9,6 +9,7 @@ type Props = {
   id: Word["id"];
   note: string;
   setNote: (id: Word["id"], notes: string) => void;
+  actionButtonLabel?: string;
 };
 
 const AddToUserCollectionFormContainer = styled("div")(({ theme }) => {
@@ -46,12 +47,12 @@ function AddToUserCollectionForm(props: Props): JSX.Element {
   return (
     <FetchedDataContainer loading={loading} error={error}>
       {done ? (
-        <p>Added Successfully!</p>
+        <Alert severity="success">Done!</Alert>
       ) : (
         <AddToUserCollectionFormContainer>
           <AddToUserCollectionFormTextField multiline label="Notes" value={props.note} onChange={handleSetNote} />
           <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
-            Add To Collection
+            {props.actionButtonLabel || "Add To Collection"}
           </Button>
         </AddToUserCollectionFormContainer>
       )}
