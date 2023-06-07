@@ -7,7 +7,7 @@ import { Word } from "types/words";
 
 type Props = {
   id: Word["id"];
-  note: string;
+  note: string | null;
   setNote: (id: Word["id"], notes: string) => void;
   actionButtonLabel?: string;
 };
@@ -50,7 +50,7 @@ function AddToUserCollectionForm(props: Props): JSX.Element {
         <Alert severity="success">Done!</Alert>
       ) : (
         <AddToUserCollectionFormContainer>
-          <AddToUserCollectionFormTextField multiline label="Notes" value={props.note} onChange={handleSetNote} />
+          <AddToUserCollectionFormTextField multiline label="Notes" value={props.note || ""} onChange={handleSetNote} />
           <Button type="submit" size="small" variant="contained" onClick={handleAddToCollectionSubmit}>
             {props.actionButtonLabel || "Add To Collection"}
           </Button>

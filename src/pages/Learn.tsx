@@ -9,21 +9,21 @@ import { Word } from "types/words";
 
 type PrevNextPagerProps = {
   items: Word[] | null;
-  notesMap: Record<Word["id"], string>;
+  notesMap: Record<Word["id"], string | null>;
   setNote: (id: Word["id"], notes: string) => void;
 };
 
 function Learn(): JSX.Element {
-  const [notesMap, setNotesMap] = useState<Record<Word["id"], string>>({});
+  const [notesMap, setNotesMap] = useState<Record<Word["id"], string | null>>({});
   // TODO add a selector for batch number
   const { data, error, loading } = useFetch<Word[]>(() => learnWords(10), { triggerOnMount: true });
 
   useEffect(() => {
     setNotesMap(() => {
-      const hashMap: Record<Word["id"], string> = {};
+      const hashMap: Record<Word["id"], string | null> = {};
       if (!data) return hashMap;
       for (const item of data) {
-        hashMap[item.id] = "";
+        hashMap[item.id] = null;
       }
       return hashMap;
     });
@@ -60,7 +60,7 @@ function PrevNextPager(props: PrevNextPagerProps): JSX.Element {
 
   const wordDetails = props.items[currentPage];
   const wordId = wordDetails.id;
-  const wordNote = props.notesMap[wordId] || "";
+  const wordNote = props.notesMap[wordId];
 
   return (
     <div>

@@ -5,7 +5,7 @@ import WordDetails from "./Word";
 
 type Props = {
   details: Word;
-  note: string;
+  note: string | null;
   setNote: (id: Word["id"], notes: string) => void;
 };
 

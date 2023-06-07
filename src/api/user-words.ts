@@ -4,7 +4,7 @@ import axios from "../axios";
 
 const path = `/v1/users-words`;
 
-export async function addWordToUserCollection(id: Word["id"], notes: string | undefined): Promise<void> {
+export async function addWordToUserCollection(id: Word["id"], notes: string | null): Promise<void> {
   await axios.post(`${path}/${id}`, { notes });
 }
 

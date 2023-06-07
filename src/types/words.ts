@@ -78,7 +78,7 @@ export type Word = {
 
 export type PracticeWord = {
   word: Word;
-  notes?: string;
+  notes: string | null;
 };
 
 type CollectionEntry = {

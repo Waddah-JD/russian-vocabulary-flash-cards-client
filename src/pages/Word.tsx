@@ -55,7 +55,7 @@ function AddWordToUserCollection(props: AddWordToUserCollectionProps): JSX.Eleme
 
   useEffect(() => {
     setNote(props.note);
-  }, [props.note]);
+  }, [props.id, props.note, props.note]);
 
   function handleSetNote(_: Word["id"], notes: string): void {
     setNote(notes);

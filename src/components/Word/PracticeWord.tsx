@@ -20,7 +20,7 @@ type SubmitPracticeResultFormProps = {
 
 type AddOrUpdateNoteProps = {
   id: Word["id"];
-  note?: string;
+  note: string | null;
 };
 
 const PracticeResultFormContainer = styled("div")(() => {
@@ -83,24 +83,17 @@ function PracticeWord(props: Props): JSX.Element {
 }
 
 function AddOrUpdateNote(props: AddOrUpdateNoteProps): JSX.Element {
-  const [note, setNote] = useState<string>(props.note || "");
+  const [note, setNote] = useState<string | null>(props.note);
 
   useEffect(() => {
-    setNote(props.note || "");
-  }, [props.note]);
+    setNote(props.note);
+  }, [props.id, props.note]);
 
   function handleSetNote(_: Word["id"], notes: string): void {
     setNote(notes);
   }
 
-  return (
-    <AddToUserCollectionForm
-      id={props.id}
-      note={note}
-      setNote={handleSetNote}
-      actionButtonLabel={props.note && "Update Note"}
-    />
-  );
+  return <AddToUserCollectionForm id={props.id} note={note} setNote={handleSetNote} actionButtonLabel="Update Note" />;
 }
 
 export default PracticeWord;
