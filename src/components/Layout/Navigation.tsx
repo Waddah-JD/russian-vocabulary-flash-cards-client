@@ -40,10 +40,10 @@ function Navigation(): JSX.Element {
 
       {userIsAuthenticated ? (
         <NavBar item xs={12} sm={6}>
-          <Link component={RouterLink} to="/learn" underline="none">
+          <Link component={RouterLink} to="/learn">
             Learn
           </Link>
-          <Link component={RouterLink} to="/practice" underline="none">
+          <Link component={RouterLink} to="/practice">
             Practice
           </Link>
           <Button variant="outlined" size="small" onClick={handleSignOut}>
@@ -52,10 +52,10 @@ function Navigation(): JSX.Element {
         </NavBar>
       ) : (
         <NavBar item xs={12} sm={6}>
-          <Link component={RouterLink} to="/sign-in" underline="none">
+          <Link component={RouterLink} to="/sign-in">
             Sign In
           </Link>
-          <Link component={RouterLink} to="/sign-up" underline="none">
+          <Link component={RouterLink} to="/sign-up">
             Sign Up
           </Link>
         </NavBar>
