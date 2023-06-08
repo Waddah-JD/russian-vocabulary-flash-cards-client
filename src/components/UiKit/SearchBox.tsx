@@ -2,6 +2,9 @@ import { CircularProgress, TextField } from "@mui/material";
 import { styled } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
+const DEFAULT_BOX_WIDTH = 300;
+const DEFAULT_BOX_LIST_HEIGHT = 163;
+
 type Option = {
   id: string | number;
   label: string;
@@ -23,8 +26,8 @@ type ListBoxProps<T> = {
 
 const ListboxContainer = styled("ul")(({ theme, style }) => {
   return {
-    width: style?.width || 300,
-    maxHeight: 163,
+    width: style?.width || DEFAULT_BOX_WIDTH,
+    maxHeight: DEFAULT_BOX_LIST_HEIGHT,
     margin: 0,
     padding: 0,
     zIndex: 100,
@@ -41,8 +44,10 @@ const ListContainerItem = styled("li")(() => {
   return {
     cursor: "pointer",
     paddingInline: "12px",
-    paddingBlock: "8px",
-    borderBlockEnd: "1px solid grey",
+    paddingBlock: "4px",
+    ":not(:last-child)": {
+      borderBlockEnd: "1px solid grey",
+    },
   };
 });
 
@@ -79,7 +84,7 @@ function ListBox<T extends Option>(props: ListBoxProps<T>): JSX.Element {
 
 function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   let throttledCall: NodeJS.Timeout;
-  const width = props.width || 300;
+  const width = props.width || DEFAULT_BOX_WIDTH;
   const THROTTLE_RATE = props.throttleRate || 0;
 
   const containerRef = useRef<HTMLInputElement>(null);
