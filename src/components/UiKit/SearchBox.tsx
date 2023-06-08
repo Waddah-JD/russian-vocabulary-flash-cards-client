@@ -1,9 +1,11 @@
 import { CircularProgress, TextField } from "@mui/material";
 import { styled } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { shouldForwardProp } from "utils/mui";
 
 const DEFAULT_BOX_WIDTH = 300;
 const DEFAULT_BOX_LIST_HEIGHT = 163;
+const DEFAULT_BOX_INLINE_MARGIN = 2;
 
 type Option = {
   id: string | number;
@@ -24,18 +26,25 @@ type ListBoxProps<T> = {
   closeList?: () => void;
 };
 
-const ListboxContainer = styled("ul")(({ theme, style }) => {
+type ListboxContainerProps = {
+  width?: number;
+};
+
+const ListboxContainer = styled("ul", {
+  shouldForwardProp: (prop) => shouldForwardProp<ListboxContainerProps>(["width"], prop),
+})<ListboxContainerProps>(({ theme, width }) => {
   return {
-    width: style?.width || DEFAULT_BOX_WIDTH,
+    width: width || DEFAULT_BOX_WIDTH,
     maxHeight: DEFAULT_BOX_LIST_HEIGHT,
-    margin: 0,
+    marginInline: DEFAULT_BOX_INLINE_MARGIN,
+    marginBlock: 0,
     padding: 0,
     zIndex: 100,
     position: "absolute",
     listStyle: "none",
     backgroundColor: theme.palette.mode === "light" ? "white" : "black",
     overflow: "auto",
-    boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.5)",
+    boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.4)",
     borderRadius: "4px",
   };
 });
@@ -46,7 +55,7 @@ const ListContainerItem = styled("li")(() => {
     paddingInline: "12px",
     paddingBlock: "4px",
     ":not(:last-child)": {
-      borderBlockEnd: "1px solid grey",
+      borderBlockEnd: "1px solid rgba(0, 0, 0, 0.2)",
     },
   };
 });
@@ -56,14 +65,14 @@ function ListBox<T extends Option>(props: ListBoxProps<T>): JSX.Element {
 
   if (props.values.length === 0) {
     return (
-      <ListboxContainer style={{ width: props.width }}>
-        <li>No Results</li>
+      <ListboxContainer width={props.width}>
+        <ListContainerItem>No Results</ListContainerItem>
       </ListboxContainer>
     );
   }
 
   return (
-    <ListboxContainer style={{ width: props.width }}>
+    <ListboxContainer width={props.width}>
       {props.values.map((option, index) => {
         return (
           <ListContainerItem
@@ -149,7 +158,12 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
       />
 
       {isOpen && searchTerm && (
-        <ListBox<T> values={options} isLoading={isLoading} width={width} closeList={handleCloseListAndUnfocusBox} />
+        <ListBox<T>
+          values={options}
+          isLoading={isLoading}
+          width={width - DEFAULT_BOX_INLINE_MARGIN * 2}
+          closeList={handleCloseListAndUnfocusBox}
+        />
       )}
     </div>
   );
