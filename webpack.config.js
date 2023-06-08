@@ -21,7 +21,9 @@ const baseConfig = {
       contexts: path.resolve(__dirname, "./src/contexts/"),
     },
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.join("public", "index.html") })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: path.join("public", "index.html"), favicon: path.join("assets", "favicon.png") }),
+  ],
   mode: "none",
   output: { publicPath: "/" },
   devServer: { historyApiFallback: true },
