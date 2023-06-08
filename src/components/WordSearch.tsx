@@ -32,7 +32,7 @@ async function handleRussianWordSearch(
   if (!result?.data) return [];
   return result.data.map(({ id, word }) => {
     return {
-      id: id,
+      id,
       label: word,
       onClick: (): void => navigationFn(`/words/${id}`),
     };
@@ -47,7 +47,7 @@ async function handleEnglishWordSearch(
   if (!result?.data) return [];
   return result.data.map(({ id, translation }) => {
     return {
-      id: id,
+      id,
       label: translation,
       onClick: (): void => navigationFn(`/english-translations/${id}`),
     };

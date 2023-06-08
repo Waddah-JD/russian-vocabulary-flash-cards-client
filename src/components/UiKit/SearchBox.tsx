@@ -87,34 +87,28 @@ function SearchBox<T extends Option>(props: Props<T>): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState<T[] | null>(null);
 
-  async function handleSearch(): Promise<void> {
-    const results = await props.searchFunction(searchTerm);
-    setOptions(results);
-    setIsLoading(false);
-  }
-
   useEffect(() => {
-    if (searchTerm) {
-      setIsLoading(true);
-    }
-
     if (throttledCall) {
       clearTimeout(throttledCall);
     }
 
-    throttledCall = setTimeout(() => {
+    setOptions(null);
+
+    if (searchTerm) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+
+    throttledCall = setTimeout(async () => {
       if (searchTerm) {
-        handleSearch();
+        const results = await props.searchFunction(searchTerm);
+        setOptions(results);
+        setIsLoading(false);
       }
     }, THROTTLE_RATE);
 
     return () => clearTimeout(throttledCall);
-  }, [searchTerm]);
-
-  useEffect(() => {
-    if (!searchTerm) {
-      setOptions(null);
-    }
   }, [searchTerm]);
 
   function handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>): void {
