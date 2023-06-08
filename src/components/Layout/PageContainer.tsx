@@ -1,5 +1,5 @@
-import { Box, Grid, styled } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Box, Grid, Link, styled } from "@mui/material";
+import { Link as RouterLink, Outlet } from "react-router-dom";
 
 import Navigation from "./Navigation";
 
@@ -24,7 +24,11 @@ function PageContainer(): JSX.Element {
     <Box p={1}>
       <Menu container>
         <Grid item sm={12} md={6}>
-          <Title>Russian Vocabulary Flashcards</Title>
+          <Title>
+            <Link component={RouterLink} to="/" underline="none">
+              Russian Vocabulary Flashcards
+            </Link>
+          </Title>
         </Grid>
 
         <Grid item sm={12} md={6}>
