@@ -24,7 +24,7 @@ type ListBoxProps<T> = {
 const ListboxContainer = styled("ul")(({ theme, style }) => {
   return {
     width: style?.width || 300,
-    maxHeight: 200,
+    maxHeight: 163,
     margin: 0,
     padding: 0,
     zIndex: 100,
@@ -32,7 +32,8 @@ const ListboxContainer = styled("ul")(({ theme, style }) => {
     listStyle: "none",
     backgroundColor: theme.palette.mode === "light" ? "white" : "black",
     overflow: "auto",
-    border: "1px solid black",
+    boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.5)",
+    borderRadius: "4px",
   };
 });
 
@@ -40,7 +41,8 @@ const ListContainerItem = styled("li")(() => {
   return {
     cursor: "pointer",
     paddingInline: "12px",
-    marginBlock: "8px",
+    paddingBlock: "8px",
+    borderBlockEnd: "1px solid grey",
   };
 });
 
